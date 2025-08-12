@@ -1,21 +1,25 @@
-import { alpha } from "@mui/material/styles";
+import { createTheme } from "@mui/material";
 
 const BRAND = {
-  primary: "#27B06E",
-  secondary: "#0F172A",
+  primary01: "#005B3B",
+  primary02: "#009C64",
+  primary03: "#00FFA4",
+  primary04: "#A6FFDF",
+  secondary: "#000000",
 };
 
 const GREY = {
-  50: "#F9FAFB",
-  100: "#F3F4F6",
-  200: "#E5E7EB",
-  300: "#D1D5DB",
-  400: "#9CA3AF",
-  500: "#6B7280",
-  600: "#4B5563",
-  700: "#374151",
-  800: "#1F2937",
-  900: "#111827",
+  900: "#000000", // Gray01
+  800: "#121212", // Gray02
+  700: "#333333", // Gray03
+  600: "#666666", // Gray04
+  550: "#787878", // Gray05
+  500: "#999999", // Gray06
+  400: "#BBBBBB", // Gray07
+  300: "#CCCCCC", // Gray08
+  200: "#DDDDDD", // Gray09
+  100: "#EFEFEF", // Gray10
+  50: "#FAFAFA", // Gray11
 };
 
 const FEEDBACK = {
@@ -25,89 +29,39 @@ const FEEDBACK = {
   success: "#16A34A",
 };
 
-const palette = (mode = "light") => {
-  const isLight = mode === "light";
+let baseTheme = createTheme();
 
-  const text = {
-    primary: isLight ? GREY[900] : "#F3F4F6",
-    secondary: isLight ? GREY[600] : GREY[300],
-    disabled: isLight ? alpha(GREY[900], 0.38) : alpha("#F3F4F6", 0.38),
-  };
+function makeColor(name, main, contrastText = "#fff") {
+  return baseTheme.palette.augmentColor({
+    color: { main, contrastText },
+    name,
+  });
+}
 
-  const background = {
-    default: isLight ? "#FFFFFF" : "#0B1020",
-    paper: isLight ? "#FFFFFF" : "#0E1426",
-  };
+const palette = {
+  mode: "light",
 
-  return {
-    mode,
+  primary: makeColor("primary", BRAND.primary04, GREY[800]),
+  secondary: makeColor("secondary", BRAND.secondary, "#FFFFFF"),
+  error: makeColor("error", FEEDBACK.error, "#FFFFFF"),
+  warning: makeColor("warning", FEEDBACK.warning, "#111827"),
+  info: makeColor("info", FEEDBACK.info, "#FFFFFF"),
+  success: makeColor("success", FEEDBACK.success, "#FFFFFF"),
 
-    primary: {
-      main: BRAND.primary,
-      light: "#4FD39A",
-      dark: "#1E8A55",
-      contrastText: "#FFFFFF",
-    },
+  grey: GREY,
+  text: {
+    primary: GREY[800],
+    secondary: GREY[600],
+    disabled: "rgba(17, 24, 39, 0.38)",
+  },
+  background: { default: "#FFFFFF", paper: "#FFFFFF" },
+  divider: GREY[200],
 
-    secondary: {
-      main: BRAND.secondary,
-      light: "#27324A",
-      dark: "#0A1020",
-      contrastText: "#FFFFFF",
-    },
-
-    error: {
-      main: FEEDBACK.error,
-      light: "#F87171",
-      dark: "#B91C1C",
-      contrastText: "#FFFFFF",
-    },
-    warning: {
-      main: FEEDBACK.warning,
-      light: "#FBBF24",
-      dark: "#B45309",
-      contrastText: "#111827",
-    },
-    info: {
-      main: FEEDBACK.info,
-      light: "#60A5FA",
-      dark: "#1D4ED8",
-      contrastText: "#FFFFFF",
-    },
-    success: {
-      main: FEEDBACK.success,
-      light: "#34D399",
-      dark: "#166534",
-      contrastText: "#FFFFFF",
-    },
-
-    grey: GREY,
-    text,
-    background,
-
-    divider: isLight ? GREY[200] : alpha("#FFFFFF", 0.12),
-
-    action: {
-      active: isLight ? GREY[700] : "#E5E7EB",
-      hover: isLight ? alpha(GREY[900], 0.06) : alpha("#FFFFFF", 0.08),
-      selected: isLight ? alpha(GREY[900], 0.12) : alpha("#FFFFFF", 0.16),
-      disabled: isLight ? alpha(GREY[900], 0.38) : alpha("#FFFFFF", 0.38),
-      disabledBackground: isLight
-        ? alpha(GREY[900], 0.12)
-        : alpha("#FFFFFF", 0.12),
-      focus: isLight ? alpha(BRAND.primary, 0.24) : alpha(BRAND.primary, 0.32),
-      hoverOpacity: 0.06,
-      disabledOpacity: 0.38,
-      focusOpacity: 0.12,
-      selectedOpacity: 0.12,
-      activatedOpacity: 0.12,
-    },
-    brandGradient: `linear-gradient(90deg, ${BRAND.primary}, ${alpha(
-      "#0EA5A5",
-      0.9
-    )})`,
-    outline: isLight ? GREY[200] : alpha("#FFFFFF", 0.16),
-  };
+  // 커스텀 팔레트 슬롯
+  primary01: makeColor("primary01", BRAND.primary01, "#FFFFFF"),
+  primary02: makeColor("primary02", BRAND.primary02, "#FFFFFF"),
+  primary03: makeColor("primary03", BRAND.primary03, GREY[800]),
+  primary04: makeColor("primary04", BRAND.primary04, GREY[800]),
 };
 
 export default palette;
