@@ -21,7 +21,7 @@ export default function GlobalStyle() {
         },
         html: {
           margin: 0,
-          padding: "25px 32px 36px 32px",
+          padding: 0,
           width: "100%",
           // height: "100%",
           //WebkitOverflowScrolling: "touch",
@@ -35,6 +35,7 @@ export default function GlobalStyle() {
         "#root": {
           width: "100%",
           height: "100%",
+          padding: "25px 32px 36px 32px",
         },
         input: {
           outline: "none",
