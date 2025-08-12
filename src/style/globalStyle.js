@@ -21,7 +21,7 @@ export default function GlobalStyle() {
         },
         html: {
           margin: 0,
-          padding: 0,
+          padding: "25px 32px 36px 32px",
           width: "100%",
           // height: "100%",
           //WebkitOverflowScrolling: "touch",
