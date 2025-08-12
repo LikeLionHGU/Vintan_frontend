@@ -34,7 +34,10 @@ export default function Header() {
 
   return (
     <>
-      <HorizontalStart id="header" sx={{ justifyContent: "space-between" }}>
+      <HorizontalStart
+        id="header"
+        sx={{ justifyContent: "space-between", pb: 3 }}
+      >
         <Box
           component="img"
           src={Logo}

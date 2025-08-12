@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Grid, styled, Typography } from "@mui/material";
 import { main_info } from "../utils/common";
-import { pxToRem } from "../theme/typography";
 import VideoSection from "../components/Main/VideoSection";
 
 export default function Main() {
@@ -12,6 +11,7 @@ export default function Main() {
         size={{ md: 7.5, xs: 12 }}
         sx={{
           display: "flex",
+          height: "100%",
           flexDirection: "column",
           justifyContent: "space-between",
         }}
@@ -36,7 +36,7 @@ export default function Main() {
       </Grid>
 
       {/* 서비스 소개 영상 영역 */}
-      <Grid size={{ md: 4.5, xs: 12 }}>
+      <Grid size={{ md: 4.5, xs: 12 }} sx={{ height: "100%" }}>
         <VideoSection />
       </Grid>
     </Container>
@@ -50,12 +50,12 @@ const Container = styled(Grid)`
 
 const ReportArea = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.grey[700],
-  height: pxToRem(391),
+  height: "48vh",
   borderRadius: "20px",
 }));
 
 const CommunityArea = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  height: pxToRem(391),
+  height: "48vh",
   borderRadius: "20px",
 }));
