@@ -38,6 +38,7 @@ export default function Main() {
               title={main_info.report.title}
               description={main_info.report.description}
               arrowIcon={Arrow}
+              hoverGradient="linear-gradient(180deg, rgba(0, 255, 164, 0.15) 0%, rgba(0, 255, 164, 0.00) 100%);"
             />
           </Grid>
           <Grid size={{ md: 4, xs: 12 }}>
@@ -47,6 +48,7 @@ export default function Main() {
               title={main_info.community.title}
               description={main_info.community.description}
               arrowIcon={Arrow}
+              hoverGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%)"
             />
           </Grid>
         </Container>
