@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Grid, styled, Typography, useTheme } from "@mui/material";
 import { main_info } from "../utils/common";
-import VideoSection from "../components/Main/VideoSection";
-import MainButton from "../components/Main/MainButton";
+import VideoSection from "../components/main/VideoSection";
+import MainButton from "../components/main/MainButton";
 import { ReactComponent as Report } from "../imgs/header/report.svg";
 import { ReactComponent as Community } from "../imgs/header/community.svg";
 import { ReactComponent as Arrow } from "../imgs/main/arrow.svg";
