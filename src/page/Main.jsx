@@ -1,9 +1,14 @@
 import React from "react";
-import { Box, Grid, styled, Typography } from "@mui/material";
+import { Box, Grid, styled, Typography, useTheme } from "@mui/material";
 import { main_info } from "../utils/common";
 import VideoSection from "../components/Main/VideoSection";
+import MainButton from "../components/Main/MainButton";
+import { ReactComponent as Report } from "../imgs/header/report.svg";
+import { ReactComponent as Community } from "../imgs/header/community.svg";
+import { ReactComponent as Arrow } from "../imgs/main/arrow.svg";
 
 export default function Main() {
+  const theme = useTheme();
   return (
     <Container container spacing={4} sx={{ height: "100%" }}>
       {/* 서비스 소개 영역 */}
@@ -27,10 +32,22 @@ export default function Main() {
         {/* 기능 버튼 영역 */}
         <Container container spacing={4}>
           <Grid size={{ md: 8, xs: 12 }}>
-            <ReportArea />
+            <MainButton
+              bgColor={theme.palette.grey[700]}
+              mainIcon={Report}
+              title={main_info.report.title}
+              description={main_info.report.description}
+              arrowIcon={Arrow}
+            />
           </Grid>
           <Grid size={{ md: 4, xs: 12 }}>
-            <CommunityArea />
+            <MainButton
+              bgColor={theme.palette.primary.main}
+              mainIcon={Community}
+              title={main_info.community.title}
+              description={main_info.community.description}
+              arrowIcon={Arrow}
+            />
           </Grid>
         </Container>
       </Grid>
@@ -47,15 +64,3 @@ const Container = styled(Grid)`
   display: flex;
   flex-direction: row;
 `;
-
-const ReportArea = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.grey[700],
-  height: "48vh",
-  borderRadius: "20px",
-}));
-
-const CommunityArea = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  height: "48vh",
-  borderRadius: "20px",
-}));
