@@ -3,10 +3,12 @@ import React, { useId } from "react";
 import { VerticalBox } from "../../style/CommunalStyle";
 export default function LoginInput({
   text,
-  errorText,
+  errorText = "에러 텍스트",
   isEssential = false,
   placeholder,
   id,
+  value,
+  onChange,
   isError = false,
   ...rest
 }) {
@@ -22,7 +24,6 @@ export default function LoginInput({
         sx={{
           display: "inline-flex",
           alignItems: "center",
-          gap: 0.5,
           color: `${isError ? "error.main" : "grey[900"}`,
         }}
       >
@@ -40,6 +41,8 @@ export default function LoginInput({
           disableUnderline
           placeholder={placeholder}
           fullWidth
+          value={value ?? ""}
+          onChange={onChange}
           isError={isError}
           inputProps={{ "aria-required": isEssential ? "true" : undefined }}
           {...rest}
@@ -64,9 +67,10 @@ const Input = styled(MuiInput, {
   shouldForwardProp: (prop) => prop !== "isError",
 })(({ theme, isError }) => ({
   width: "100%",
-  border: `${isError ? "2px" : "1px"} solid ${
+  border: `1px solid ${
     isError ? theme.palette.error.main : theme.palette.grey[500]
   }`,
+
   borderRadius: 8,
   padding: "8px 12px",
 
