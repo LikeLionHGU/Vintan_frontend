@@ -35,7 +35,7 @@ export default function GlobalStyle() {
         "#root": {
           width: "100%",
           height: "100vh",
-          padding: "25px 32px 36px 32px",
+          padding: "0 32px 36px 32px",
           whiteSpace: "pre-line",
         },
         input: {

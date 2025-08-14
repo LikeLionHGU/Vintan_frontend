@@ -36,7 +36,16 @@ export default function Header() {
     <>
       <HorizontalBox
         id="header"
-        sx={{ justifyContent: "space-between", pb: 3 }}
+        sx={{
+          bgcolor: "#fafafa",
+          justifyContent: "space-between",
+          position: "fixed",
+          py: 2.2,
+          px: 4,
+          top: 0,
+          left: 0,
+          right: 0,
+        }}
       >
         <Box
           component="img"

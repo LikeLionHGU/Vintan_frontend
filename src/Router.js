@@ -18,7 +18,7 @@ export default function Router() {
       >
         <Header />
 
-        <Box sx={{ flex: 1, minHeight: 0 }}>
+        <Box sx={{ flex: 1, minHeight: 0, pt: 10 }}>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
