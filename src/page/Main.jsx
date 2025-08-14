@@ -10,7 +10,7 @@ import { ReactComponent as Arrow } from "../imgs/main/arrow.svg";
 export default function Main() {
   const theme = useTheme();
   return (
-    <Container container spacing={4} sx={{ height: "100%" }}>
+    <Container container pt={4.5} spacing={4} sx={{ height: "100%" }}>
       {/* 서비스 소개 영역 */}
       <Grid
         size={{ md: 7.5, xs: 12 }}

@@ -12,7 +12,7 @@ import {
   Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Horizontal, HorizontalStart } from "../../style/CommunalStyle";
+import { Horizontal, HorizontalBox } from "../../style/CommunalStyle";
 import Logo from "../../imgs/header/logo.svg";
 import Sidebar from "../../imgs/header/sidebar_button.svg";
 import CloseBtn from "../../imgs/header/close.svg";
@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <>
-      <HorizontalStart
+      <HorizontalBox
         id="header"
         sx={{ justifyContent: "space-between", pb: 3 }}
       >
@@ -49,7 +49,7 @@ export default function Header() {
         <SidebarButton aria-label="open sidebar" onClick={toggleDrawer(true)}>
           <Box component="img" src={Sidebar} alt="sidebar" />
         </SidebarButton>
-      </HorizontalStart>
+      </HorizontalBox>
 
       <Drawer
         anchor="right"

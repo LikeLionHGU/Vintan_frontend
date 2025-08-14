@@ -64,11 +64,11 @@ export const non_member_navigation_list = [
   {
     text: "로그인",
     img: User,
-    link: "/",
+    link: "/login",
   },
   {
     text: "회원가입",
     img: JoiningUser,
-    link: "/",
+    link: "/signup",
   },
 ];

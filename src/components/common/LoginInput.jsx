@@ -1,0 +1,80 @@
+import { Box, Input as MuiInput, styled, Typography } from "@mui/material";
+import React, { useId } from "react";
+import { VerticalBox } from "../../style/CommunalStyle";
+export default function LoginInput({
+  text,
+  errorText,
+  isEssential = false,
+  placeholder,
+  id,
+  isError = false,
+  ...rest
+}) {
+  const autoId = useId();
+  const inputId = id || `login-input-${autoId}`;
+
+  return (
+    <VerticalBox sx={{ gap: 1.5 }}>
+      <Typography
+        variant="h2"
+        component="label"
+        htmlFor={inputId}
+        sx={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 0.5,
+          color: `${isError ? "error.main" : "grey[900"}`,
+        }}
+      >
+        {text}
+        {isEssential && (
+          <Box component="span" sx={{ color: "error.main" }} aria-hidden>
+            *
+          </Box>
+        )}
+      </Typography>
+
+      <VerticalBox gap={1}>
+        <Input
+          id={inputId}
+          disableUnderline
+          placeholder={placeholder}
+          fullWidth
+          isError={isError}
+          inputProps={{ "aria-required": isEssential ? "true" : undefined }}
+          {...rest}
+        />
+
+        <Typography
+          variant="caption2"
+          sx={{
+            color: "error.main",
+            visibility: isError ? "visible" : "hidden",
+          }}
+        >
+          {errorText}
+        </Typography>
+      </VerticalBox>
+    </VerticalBox>
+  );
+}
+
+const Input = styled(MuiInput, {
+  // `isError` prop이 DOM 요소로 전달되지 않도록 필터링
+  shouldForwardProp: (prop) => prop !== "isError",
+})(({ theme, isError }) => ({
+  width: "100%",
+  border: `${isError ? "2px" : "1px"} solid ${
+    isError ? theme.palette.error.main : theme.palette.grey[500]
+  }`,
+  borderRadius: 8,
+  padding: "8px 12px",
+
+  // underline 완전 제거
+  "&:before, &:after": { display: "none" },
+
+  "&:focus-within": {
+    borderColor: theme.palette.grey[600],
+    outline: "none",
+  },
+}));

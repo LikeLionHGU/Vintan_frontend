@@ -82,6 +82,11 @@ const typography = {
     fontSize: pxToRem(15),
     letterSpacing: "0.01em",
   },
+  caption2: {
+    fontWeight: WEIGHT.semibold,
+    lineHeight: 1.4,
+    fontSize: pxToRem(12),
+  },
 };
 
 export default typography;

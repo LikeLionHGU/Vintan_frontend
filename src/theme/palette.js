@@ -23,7 +23,7 @@ const GREY = {
 };
 
 const FEEDBACK = {
-  error: "#EF4444",
+  error: "#D12E34",
   warning: "#F59E0B",
   info: "#3B82F6",
   success: "#16A34A",

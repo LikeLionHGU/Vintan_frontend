@@ -12,10 +12,8 @@ export const Vertical = styled(FlexBase)`
   align-items: center;
 `;
 
-export const VerticalStart = styled(FlexBase)`
+export const VerticalBox = styled(FlexBase)`
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 `;
 
 // 가로 정렬
@@ -24,8 +22,6 @@ export const Horizontal = styled(FlexBase)`
   align-items: center;
 `;
 
-export const HorizontalStart = styled(FlexBase)`
+export const HorizontalBox = styled(FlexBase)`
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
 `;
