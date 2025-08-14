@@ -122,22 +122,25 @@ const Container = styled(Box, {
     display: "flex",
     alignItems: "flex-start",
 
+    // "& > svg": {
+    //   width: "fit-content",
+    //   height: "100%",
+    //   display: "block",
+    // },
     "& > svg": {
-      width: "fit-content",
-      height: "100%",
+      width: "auto", // ← 사파리 안전
+      height: "100%", // 부모가 명확한 높이를 가져서 % 사용 가능
       display: "block",
+      transform: "scale(1.3)",
+      transformOrigin: "center",
+      // 사파리 구버전 대비
+      WebkitTransformOrigin: "center",
     },
     "& svg path": {
-      fill: $iconColor, //baseTextColor 변수를 여기에 넣어야 함
-      transformBox: "fill-box",
-      transformOrigin: "center",
-      transition: "fill 240ms ease, transform 360ms ease, opacity 240ms ease",
+      fill: $iconColor,
+      transition: "fill 240ms ease, opacity 240ms ease",
     },
-    // 아이콘 크기 1.3배 확대
-    "& > svg path": {
-      transform: "scale(1.3)",
-      vectorEffect: "non-scaling-stroke", // stroke 두께 유지
-    },
+    // 아이콘 전체를 확대 (사파리 호환 ↑)
 
     transition: "opacity 240ms ease",
     opacity: 1, // 기본은 표시

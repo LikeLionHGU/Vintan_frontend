@@ -41,7 +41,7 @@ function makeColor(name, main, contrastText = "#fff") {
 const palette = {
   mode: "light",
 
-  primary: makeColor("primary", BRAND.primary04, GREY[800]),
+  primary: makeColor("primary", BRAND.primary03, GREY[800]),
   secondary: makeColor("secondary", BRAND.secondary, "#FFFFFF"),
   error: makeColor("error", FEEDBACK.error, "#FFFFFF"),
   warning: makeColor("warning", FEEDBACK.warning, "#111827"),
