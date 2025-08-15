@@ -39,6 +39,7 @@ export default function Main() {
               description={main_info.report.description}
               arrowIcon={Arrow}
               hoverGradient="linear-gradient(180deg, rgba(0, 255, 164, 0.15) 0%, rgba(0, 255, 164, 0.00) 100%);"
+              link={"/report"}
             />
           </Grid>
           <Grid size={{ md: 4, xs: 12 }}>

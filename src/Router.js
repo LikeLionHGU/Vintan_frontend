@@ -5,6 +5,7 @@ import Header from "./components/common/Header";
 import { Box } from "@mui/material";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
+import Report from "./page/Report";
 
 export default function Router() {
   return (
@@ -23,6 +24,7 @@ export default function Router() {
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/report" element={<Report />} />
           </Routes>
         </Box>
       </Box>

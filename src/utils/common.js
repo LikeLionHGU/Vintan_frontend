@@ -31,7 +31,7 @@ export const member_navigation_list = [
   {
     text: "AI 보고서",
     img: Report,
-    link: "/",
+    link: "/report",
   },
   {
     text: "커뮤니티",
@@ -54,7 +54,7 @@ export const non_member_navigation_list = [
   {
     text: "AI 보고서",
     img: Report,
-    link: "/",
+    link: "/report",
   },
   {
     text: "커뮤니티",

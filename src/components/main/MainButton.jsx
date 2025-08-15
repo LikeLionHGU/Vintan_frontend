@@ -1,5 +1,6 @@
 import { Box, styled, Typography, useTheme } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MainButton({
   bgColor, // 기본 배경색 (hover 전)
@@ -9,20 +10,22 @@ export default function MainButton({
   description, // 설명 텍스트
   arrowIcon: Arrow, // 화살표 아이콘 (SVG)
   hoverGradient, // hover 시 적용할 gradient 값 (예: "linear-gradient(...)")
+  link,
 }) {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   // 기본 텍스트 색상: bgColor가 primary면 회색, 아니면 primary03
   const baseTextColor =
     bgColor === theme.palette.primary.main
       ? theme.palette.grey[700]
       : theme.palette.primary03.main;
-
   return (
     <Container
       sx={{ "--base-bg": bgColor }} // CSS 변수로 배경색 전달
       $hoverGradient={hoverGradient}
       $iconColor={baseTextColor}
+      onClick={() => navigate(link)}
     >
       {/* gradient 전환용 오버레이 */}
       {hoverGradient && <Box className="gradient-overlay" />}
