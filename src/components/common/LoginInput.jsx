@@ -63,22 +63,22 @@ export default function LoginInput({
 }
 
 const Input = styled(MuiInput, {
-  // `isError` prop이 DOM 요소로 전달되지 않도록 필터링
   shouldForwardProp: (prop) => prop !== "isError",
 })(({ theme, isError }) => ({
   width: "100%",
   border: `1px solid ${
     isError ? theme.palette.error.main : theme.palette.grey[500]
   }`,
-
   borderRadius: 8,
   padding: "8px 12px",
-
-  // underline 완전 제거
+  outline: "none",
   "&:before, &:after": { display: "none" },
 
   "&:focus-within": {
-    borderColor: theme.palette.grey[600],
-    outline: "none",
+    // isError 상태에 따라 outline 색상을 다르게 적용
+    outline: `2px solid ${
+      isError ? theme.palette.error.main : theme.palette.grey[800]
+    }`,
+    outlineOffset: "-1px",
   },
 }));

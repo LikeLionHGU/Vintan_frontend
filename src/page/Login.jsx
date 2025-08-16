@@ -26,7 +26,7 @@ export default function Login() {
   }, [formData]);
 
   return (
-    <Vertical sx={{ bgcolor: "#fafafa" }}>
+    <Vertical sx={{ bgcolor: "#fafafa", height: "100%" }}>
       <Container py={4} px={15}>
         <Typography variant="title2">로그인</Typography>
 
