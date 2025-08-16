@@ -5,8 +5,13 @@ import Map from "../../imgs/report/map.svg";
 import Building from "../../imgs/report/building.png";
 import Codepen from "../../imgs/report/codepen.png";
 import { VerticalBox } from "../../style/CommunalStyle";
+import { useReportField } from "../../store/store";
 
 export default function LocationSection() {
+  const address = useReportField("address");
+  const detailAddress = useReportField("detailAddress");
+  const area = useReportField("area");
+
   return (
     <Container p={4} gap={3.5}>
       <Typography variant="title2">분석 입지 정보 입력</Typography>
@@ -14,7 +19,12 @@ export default function LocationSection() {
       <VerticalBox gap={4}>
         <VerticalBox gap={1.5}>
           <Typography variant="h2">분석 입지 주소를 입력해주세요</Typography>
-          <TextInput placeholder="주소 검색" icon={Map} search={true} />
+          <TextInput
+            placeholder="주소 검색"
+            icon={Map}
+            search={true}
+            {...address}
+          />
         </VerticalBox>
 
         {/* 상세 주소 입력 부분 */}
@@ -25,6 +35,7 @@ export default function LocationSection() {
           <TextInput
             placeholder="건물 명 혹은 상세 주소 입력"
             icon={Building}
+            {...detailAddress}
           />
         </VerticalBox>
 
@@ -33,7 +44,11 @@ export default function LocationSection() {
           <Typography variant="h2">
             입지의 면적을 입력해주세요(선택).
           </Typography>
-          <TextInput placeholder="건물 명 혹은 상세 주소 입력" icon={Codepen} />
+          <TextInput
+            placeholder="건물 명 혹은 상세 주소 입력"
+            icon={Codepen}
+            {...area}
+          />
         </VerticalBox>
       </VerticalBox>
     </Container>

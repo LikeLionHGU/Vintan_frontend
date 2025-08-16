@@ -2,8 +2,13 @@ import { styled, Typography } from "@mui/material";
 import React from "react";
 import TextInput from "../common/TextInput";
 import { VerticalBox } from "../../style/CommunalStyle";
+import { useReportField } from "../../store/store";
 
 export default function BusinessSection() {
+  const bigDivision = useReportField("bigDivision");
+  const middleDivision = useReportField("middleDivision");
+  const smallDivision = useReportField("smallDivision");
+  const detail = useReportField("detail");
   return (
     <Container p={4} gap={3.5}>
       <Typography variant="title2">분석 업종 선택</Typography>
