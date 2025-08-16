@@ -8,9 +8,10 @@ export default function TextInput({
   value,
   onChange,
   search,
+  onClick,
 }) {
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative" }} onClick={onClick}>
       <Img component="img" src={icon} />
       <StyledInput
         placeholder={placeholder ? placeholder : ""}
