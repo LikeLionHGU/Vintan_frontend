@@ -4,7 +4,7 @@ import TitleWrapper from "../../imgs/report/title-wrapper.svg";
 
 export default function PageTitle({ text }) {
   return (
-    <Box>
+    <Box pt={1.5} pb={3}>
       <ImgWrapper>
         <Box component="img" src={TitleWrapper} />
         <Typography variant="title3" color="#fff">
