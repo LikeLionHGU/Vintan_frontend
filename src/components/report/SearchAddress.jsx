@@ -113,6 +113,7 @@ const Address = styled(VerticalBox)(({ theme }) => ({
   backgroundColor: "#fff",
   borderRadius: "6px",
   cursor: "pointer",
+  justifyContent: "flex-start",
 
   ".title": {
     color: theme.palette.primary02.main,

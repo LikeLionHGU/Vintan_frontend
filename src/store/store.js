@@ -21,7 +21,7 @@ export const useReportStore = create((set) => ({
     const filterValue =
       name === "area"
         ? Number.isFinite(parseFloat(value))
-          ? parseFloat(value)
+          ? parseFloat(parseFloat(value).toFixed(2))
           : 0.0
         : value;
 

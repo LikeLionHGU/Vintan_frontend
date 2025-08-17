@@ -1,10 +1,10 @@
-import { styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import React, { useState } from "react";
 import TextInput from "../common/TextInput";
 import Map from "../../imgs/report/map.svg";
 import Building from "../../imgs/report/building.png";
 import Codepen from "../../imgs/report/codepen.png";
-import { VerticalBox } from "../../style/CommunalStyle";
+import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
 import { useReportField } from "../../store/store";
 import BasicModal from "../common/BasicModal";
 import SearchAddress from "./SearchAddress";
@@ -15,14 +15,19 @@ export default function LocationSection() {
   const area = useReportField("area");
 
   const [open, setOpen] = useState(false);
+  const [areaType, setAreaType] = useState("pyeong");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await getAddressInfo("한동대");
-  //     console.log(response);
-  //   };
-  //   fetchData();
-  // }, []);
+  const handleClick = (type) => {
+    if (areaType !== type) {
+      setAreaType(type);
+      const areaValue = area.value;
+      if (type === "pyeong") {
+        area.onChange(areaValue * 0.3025); //m2 -> 평
+      } else if (type === "m2") {
+        area.onChange(areaValue * 3.3058); //평 -> m2
+      }
+    }
+  };
 
   return (
     <>
@@ -69,11 +74,31 @@ export default function LocationSection() {
             <Typography variant="h2">
               입지의 면적을 입력해주세요(선택).
             </Typography>
-            <TextInput
-              placeholder="건물 명 혹은 상세 주소 입력"
-              icon={Codepen}
-              {...area}
-            />
+            <Horizontal sx={{ justifyContent: "flex-start" }} gap={2}>
+              <TextInput
+                placeholder="입지 면적 입력"
+                icon={Codepen}
+                {...area}
+              />
+              <Box>
+                <AreaTypeButton
+                  id="pyeong"
+                  onClick={() => handleClick("pyeong")}
+                  isFocus={areaType === "pyeong"}
+                  sx={{ borderRadius: "6px 0 0 6px" }}
+                >
+                  <Typography variant="body2">평</Typography>
+                </AreaTypeButton>
+                <AreaTypeButton
+                  id="m2"
+                  onClick={() => handleClick("m2")}
+                  isFocus={areaType === "m2"}
+                  sx={{ borderRadius: "0 6px 6px 0" }}
+                >
+                  <Typography variant="body2">{"m\u00B2"}</Typography>
+                </AreaTypeButton>
+              </Box>
+            </Horizontal>
           </VerticalBox>
         </VerticalBox>
       </Container>
@@ -87,4 +112,16 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   boxShadow: "4px 4px 12px 0 rgba(0, 0, 0, 0.15)",
   height: "60vh",
   minHeight: "460px",
+}));
+
+const AreaTypeButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isFocus",
+})(({ theme, isFocus }) => ({
+  textTransform: "none",
+  minWidth: "44px",
+  height: "40px",
+  padding: 0,
+  border: `1px solid ${theme.palette.grey[500]}`,
+  background: `${isFocus ? "#fff" : theme.palette.grey[100]}`,
+  color: `${isFocus ? "#000" : theme.palette.grey[500]}`,
 }));

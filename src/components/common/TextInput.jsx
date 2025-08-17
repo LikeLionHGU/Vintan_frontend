@@ -58,6 +58,10 @@ const StyledInput = styled(Input)(({ theme }) => ({
     outline: `2px solid ${theme.palette.grey[800]}`,
     outlineOffset: "-1px",
   },
+
+  ">.css-1xnissb-MuiInputBase-input-MuiInput-input": {
+    padding: 0,
+  },
 }));
 
 const SearchImg = styled(Box)`
