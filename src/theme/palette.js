@@ -4,7 +4,7 @@ const BRAND = {
   primary01: "#005B3B",
   primary02: "#009C64",
   primary03: "#00FFA4",
-  primary04: "#A6FFDF",
+  primary04: "#DDF6ED",
   secondary: "#000000",
 };
 

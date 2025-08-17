@@ -10,7 +10,7 @@ const modalStyle = {
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   boxShadow: 24,
-  borderRadius: 2,
+  borderRadius: "24px",
   p: "20px",
   outline: "none",
   maxHeight: "80vh",
@@ -47,6 +47,8 @@ export default function BasicModal({
 
 const ClosButton = styled(Button)`
   position: absolute;
-  top: 0;
-  right: 0;
+  padding: 0;
+  top: 15px;
+  right: 15px;
+  min-width: 32px;
 `;

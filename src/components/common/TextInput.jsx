@@ -9,6 +9,8 @@ export default function TextInput({
   onChange,
   search,
   onClick,
+  onEnterDown,
+  readOnly = false,
 }) {
   return (
     <Box sx={{ position: "relative" }} onClick={onClick}>
@@ -16,7 +18,20 @@ export default function TextInput({
       <StyledInput
         placeholder={placeholder ? placeholder : ""}
         value={value ?? ""}
+        readOnly={readOnly}
         onChange={onChange}
+        onKeyDown={(e) => {
+          if (
+            e.nativeEvent.isComposing ||
+            e.key === "Process" ||
+            e.keyCode === 229
+          ) {
+            return;
+          }
+          if (e.key === "Enter" && onEnterDown) {
+            onEnterDown(e);
+          }
+        }}
         sx={{ paddingLeft: `${icon ? "44px" : "12px"}` }}
       />
       {search ? <SearchImg component="img" src={Search} /> : null}
