@@ -39,6 +39,7 @@ export default function SearchAddress({ handleClose }) {
         value={value}
         onChange={handleInputValue}
         onEnterDown={onEnterDown}
+        placeholder="주소 검색"
       />
       <VerticalBox gap={1} mt={1.5}>
         {isFirst === true && (
@@ -113,7 +114,9 @@ const Address = styled(VerticalBox)(({ theme }) => ({
   backgroundColor: "#fff",
   borderRadius: "6px",
   cursor: "pointer",
-  justifyContent: "flex-start",
+  "> div": {
+    justifyContent: "flex-start",
+  },
 
   ".title": {
     color: theme.palette.primary02.main,

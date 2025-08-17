@@ -74,7 +74,10 @@ export default function LocationSection() {
             <Typography variant="h2">
               입지의 면적을 입력해주세요(선택).
             </Typography>
-            <Horizontal sx={{ justifyContent: "flex-start" }} gap={2}>
+            <Horizontal
+              sx={{ justifyContent: "flex-start", flexWrap: "wrap" }}
+              gap={2}
+            >
               <TextInput
                 placeholder="입지 면적 입력"
                 icon={Codepen}
@@ -86,6 +89,7 @@ export default function LocationSection() {
                   onClick={() => handleClick("pyeong")}
                   isFocus={areaType === "pyeong"}
                   sx={{ borderRadius: "6px 0 0 6px" }}
+                  disabled={address.value === ""}
                 >
                   <Typography variant="body2">평</Typography>
                 </AreaTypeButton>
@@ -94,6 +98,7 @@ export default function LocationSection() {
                   onClick={() => handleClick("m2")}
                   isFocus={areaType === "m2"}
                   sx={{ borderRadius: "0 6px 6px 0" }}
+                  disabled={address.value === ""}
                 >
                   <Typography variant="body2">{"m\u00B2"}</Typography>
                 </AreaTypeButton>
@@ -115,13 +120,18 @@ const Container = styled(VerticalBox)(({ theme }) => ({
 }));
 
 const AreaTypeButton = styled(Button, {
-  shouldForwardProp: (prop) => prop !== "isFocus",
-})(({ theme, isFocus }) => ({
+  shouldForwardProp: (prop) => prop !== "isFocus" && prop !== "disabled",
+})(({ theme, isFocus, disabled }) => ({
   textTransform: "none",
   minWidth: "44px",
   height: "40px",
   padding: 0,
   border: `1px solid ${theme.palette.grey[500]}`,
-  background: `${isFocus ? "#fff" : theme.palette.grey[100]}`,
-  color: `${isFocus ? "#000" : theme.palette.grey[500]}`,
+  background: `${isFocus ? "#000" : "#fff"}`,
+  color: `${isFocus ? "#fff" : "#000"}`,
+
+  ...(disabled && {
+    background: theme.palette.grey[100],
+    color: theme.palette.grey[500],
+  }),
 }));
