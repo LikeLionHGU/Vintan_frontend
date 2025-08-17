@@ -78,11 +78,13 @@ export default function LocationSection() {
               sx={{ justifyContent: "flex-start", flexWrap: "wrap" }}
               gap={2}
             >
-              <TextInput
-                placeholder="입지 면적 입력"
-                icon={Codepen}
-                {...area}
-              />
+              <Box width="150px">
+                <TextInput
+                  placeholder="입지 면적 입력"
+                  icon={Codepen}
+                  {...area}
+                />
+              </Box>
               <Box>
                 <AreaTypeButton
                   id="pyeong"

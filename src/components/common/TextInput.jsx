@@ -59,7 +59,7 @@ const StyledInput = styled(Input)(({ theme }) => ({
     outlineOffset: "-1px",
   },
 
-  ">.css-1xnissb-MuiInputBase-input-MuiInput-input": {
+  ".MuiInputBase-input": {
     padding: 0,
   },
 }));
