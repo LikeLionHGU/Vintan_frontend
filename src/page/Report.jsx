@@ -4,9 +4,34 @@ import PageTitle from "../components/common/PageTitle";
 import LocationSection from "../components/report/LocationSection";
 import { VerticalBox } from "../style/CommunalStyle";
 import BusinessSection from "../components/report/BusinessSection";
+import { useProgressStore, useReportStore } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
 export default function Report() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const data = useReportStore((state) => state.reportValues);
+
+  const handleButtonClick = async () => {
+    console.log(data);
+
+    navigate("/loading");
+
+    try {
+      useProgressStore.getState().reset();
+
+      // 2) 로딩 화면으로 이동 + payload 전달
+      navigate("/loading", { state: { payload: data } });
+
+      // navigate(`/report/${3}`, { replace: true });
+    } catch (error) {
+      console.error(
+        "데이터를 기반으로 AI보고서를 생성하는데에 문제가 발생했습니다.",
+        error
+      );
+      throw error;
+    }
+  };
   return (
     <Container>
       <Box>
@@ -26,7 +51,7 @@ export default function Report() {
           <LocationSection />
         </Grid>
         <Grid size={{ lg: 7.5, xs: 12 }}>
-          <BusinessSection />
+          <BusinessSection onSubmit={handleButtonClick} />
         </Grid>
       </Grid>
     </Container>

@@ -48,3 +48,14 @@ export const useReportField = (name) => {
 
   return { name, value, onChange };
 };
+
+export const useProgressStore = create((set) => ({
+  isFull: false,
+  reportId: null,
+  hasResponse: false,
+
+  // 액션
+  setIsFull: (v) => set({ isFull: v }),
+  setResponse: (id) => set({ reportId: id, hasResponse: true }),
+  reset: () => set({ isFull: false, hasResponse: false, reportId: null }),
+}));

@@ -1,4 +1,4 @@
-import { Button, styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useRef } from "react";
 import TextInput from "../common/TextInput";
 import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
@@ -7,7 +7,7 @@ import { divisionList } from "../../utils/common";
 import TopCategory from "./TopCategory";
 import SubCategory from "./SubCategory";
 
-export default function BusinessSection() {
+export default function BusinessSection({ onSubmit }) {
   const bigDivision = useReportField("bigDivision");
   const middleDivision = useReportField("middleDivision");
   const smallDivision = useReportField("smallDivision");
@@ -23,15 +23,6 @@ export default function BusinessSection() {
     () => selectedBig?.middleDivisionList ?? [],
     [selectedBig]
   );
-
-  const handleButtonClick = () => {
-    const data = {
-      big: bigDivision.value,
-      middle: middleDivision.value,
-    };
-
-    console.log(data);
-  };
 
   const prevBig = useRef(bigDivision?.value);
   useEffect(() => {
@@ -86,10 +77,20 @@ export default function BusinessSection() {
             운영 조건을 최대 60자까지 입력하세요(선택). 건너뛰어도 분석
             가능합니다.
           </Typography>
-          <TextInput placeholder="주차, 단체석, 애견동반, 키즈존 등 운영 조건 입력" />
+          <TextInput
+            placeholder="주차, 단체석, 애견동반, 키즈존 등 운영 조건 입력"
+            value={detail.value}
+            onChange={detail.onChange}
+          />
         </VerticalBox>
       </VerticalBox>
-      <Button onClick={handleButtonClick}>클릭</Button>
+
+      {/* 분석하기 버튼 */}
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <SubmitButton onClick={onSubmit}>
+          <Typography variant="h2">분석하기</Typography>
+        </SubmitButton>
+      </Box>
     </Container>
   );
 }
@@ -100,4 +101,13 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   boxShadow: "4px 4px 12px 0 rgba(0, 0, 0, 0.15)",
   height: "60vh",
   minHeight: "460px",
+}));
+
+const SubmitButton = styled(Button)(({ theme }) => ({
+  borderRadius: "6px",
+  border: `1px solid ${theme.palette.primary02.main}`,
+  backgroundColor: theme.palette.primary02.main,
+  padding: "8px 20px",
+  color: "#fff",
+  width: "200px",
 }));

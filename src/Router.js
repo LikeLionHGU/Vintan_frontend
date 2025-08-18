@@ -6,6 +6,8 @@ import { Box } from "@mui/material";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Report from "./page/Report";
+import Result from "./page/Result";
+import Loading from "./page/Loading";
 
 export default function Router() {
   return (
@@ -25,6 +27,8 @@ export default function Router() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/report" element={<Report />} />
+            <Route path="/loading" element={<Loading />} />
+            <Route path="/report/:reportId" element={<Result />} />
           </Routes>
         </Box>
       </Box>
