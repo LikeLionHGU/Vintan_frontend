@@ -41,7 +41,7 @@ export default function LocationSection() {
           <SearchAddress handleClose={() => setOpen(false)} />
         </BasicModal>
       )}
-      <Container p={4} gap={3.5}>
+      <Container p={4} gap={3.5} sx={{ height: "100%" }}>
         <Typography variant="title2">분석 입지 정보 입력</Typography>
         {/* 주소 입력 부분 */}
         <VerticalBox gap={4}>
@@ -117,7 +117,6 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   borderRadius: theme.spacing(3),
   backgroundColor: "#fff",
   boxShadow: "4px 4px 12px 0 rgba(0, 0, 0, 0.15)",
-  height: "60vh",
   minHeight: "460px",
 }));
 

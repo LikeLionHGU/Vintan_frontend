@@ -35,13 +35,20 @@ export default function BusinessSection({ onSubmit }) {
   }, [bigDivision?.value, middleDivision, smallDivision, detail]);
 
   return (
-    <Container p={4} gap={3.5}>
+    <Container
+      p={4}
+      gap={3.5}
+      sx={{ lg: { height: "62vh" }, xs: { height: "auto" } }}
+    >
       <Typography variant="title2">분석 업종 선택</Typography>
       {/* 주소 입력 부분 */}
       <VerticalBox gap={4}>
         <VerticalBox gap={1.5}>
           <Typography variant="h2">대분류를 선택해주세요</Typography>
-          <Horizontal gap={2} sx={{ justifyContent: "flex-start" }}>
+          <Horizontal
+            gap={2}
+            sx={{ justifyContent: "flex-start", flexWrap: "wrap" }}
+          >
             {divisionList.map((item, index) => (
               <TopCategory
                 icon={item.img}
@@ -99,7 +106,6 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   borderRadius: theme.spacing(3),
   backgroundColor: "#fff",
   boxShadow: "4px 4px 12px 0 rgba(0, 0, 0, 0.15)",
-  height: "60vh",
   minHeight: "460px",
 }));
 

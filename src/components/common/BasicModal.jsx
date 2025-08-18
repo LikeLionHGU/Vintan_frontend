@@ -11,7 +11,7 @@ const modalStyle = {
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "24px",
-  p: "20px",
+  p: "24px",
   outline: "none",
   maxHeight: "80vh",
   overflowY: "auto",
