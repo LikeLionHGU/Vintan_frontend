@@ -37,3 +37,18 @@ export function isValidUserData(data) {
 
   return next;
 }
+
+export function splitSentences(text) {
+  if (!text) return [];
+
+  return text
+    .split(".")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s, idx) => (
+      <span key={idx}>
+        {s}.
+        <br />
+      </span>
+    ));
+}
