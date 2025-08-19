@@ -15,7 +15,7 @@ export default function Report() {
   const handleButtonClick = async () => {
     console.log(data);
 
-    navigate("/loading");
+    // navigate("/loading");
 
     try {
       useProgressStore.getState().reset();

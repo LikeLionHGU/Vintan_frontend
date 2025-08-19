@@ -8,6 +8,7 @@ import Signup from "./page/Signup";
 import Report from "./page/Report";
 import Result from "./page/Result";
 import Loading from "./page/Loading";
+import Rating from "./page/Rating";
 
 export default function Router() {
   return (
@@ -29,6 +30,7 @@ export default function Router() {
             <Route path="/report" element={<Report />} />
             <Route path="/loading" element={<Loading />} />
             <Route path="/report/:reportId" element={<Result />} />
+            <Route path="/community/rating" element={<Rating />} />
           </Routes>
         </Box>
       </Box>

@@ -50,6 +50,7 @@ export default function Main() {
               description={main_info.community.description}
               arrowIcon={Arrow}
               hoverGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%)"
+              link={"/community/rating"}
             />
           </Grid>
         </Container>
