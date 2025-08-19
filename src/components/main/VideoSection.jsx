@@ -1,5 +1,5 @@
 import { Box, styled } from "@mui/material";
-import ServiceVideo from "../../videos/Comp.mp4";
+import ServiceVideo from "../../videos/motion.mp4";
 
 // 1) 둥근 모서리 래퍼 + 대각선 깎기
 const VideoCard = styled(Box)({
