@@ -12,14 +12,37 @@ export default function SearchAddress({ handleClose }) {
   const [addressList, setAddressList] = useState([]);
   const theme = useTheme();
   const addressField = useReportField("address");
+  const [regionCode, setRegionCode] = useState(null); // 지역 코드 저장
 
   const handleInputValue = (e) => {
     setValue(e.target.value);
   };
 
-  const handleClick = (addressInfo) => {
-    addressField.onChange(addressInfo);
+  const handleClick = async (addressInfo) => {
+    addressField.onChange(addressInfo.roadAddr);
+    const dataForJson = `${addressInfo.siNm} ${addressInfo.sggNm} ${addressInfo.emdNm}`;
+    await fetchRegionCode(dataForJson, addressInfo.siNm);
     handleClose();
+  };
+
+  const fetchRegionCode = async (address, sido) => {
+    try {
+      const response = await fetch(`/regions/${sido}.json`);
+      const data = await response.json();
+
+      // data = { "포항시": [ {code, name}, ... ] }
+      const allItems = Object.values(data).flat(); // [[...], [...]] → 하나의 배열로
+      const found = allItems.find((item) => address.includes(item.name));
+
+      if (found) {
+        setRegionCode(found.code);
+        console.log("지역 코드:", found.code);
+      } else {
+        console.warn("해당 주소에 맞는 code를 찾지 못했습니다.");
+      }
+    } catch (err) {
+      console.error("지역 코드 조회 중 오류:", err);
+    }
   };
 
   const onEnterDown = async () => {
@@ -68,7 +91,7 @@ export default function SearchAddress({ handleClose }) {
               py="14px"
               key={index}
               gap={1}
-              onClick={() => handleClick(itm.roadAddr)}
+              onClick={() => handleClick(itm)}
             >
               {/* 도로명 */}
               <Horizontal gap={1.5}>
