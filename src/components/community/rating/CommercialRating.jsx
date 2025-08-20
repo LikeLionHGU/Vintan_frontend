@@ -163,7 +163,7 @@ export default function CommercialRating() {
           <BlindRate
             container
             key={index}
-            onClick={() => navigate(`/community/rating/detail?id=${item.id}`)}
+            onClick={() => navigate(`/community/rating/detail/${item.id}`)}
           >
             <Grid gap="6px" size={{ md: 3 }}>
               <Typography variant="title3">평균 {item.rate}</Typography>

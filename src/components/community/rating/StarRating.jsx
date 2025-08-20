@@ -3,12 +3,12 @@ import { Box, styled } from "@mui/material";
 import star from "../../../imgs/community/star.svg";
 import emptyStar from "../../../imgs/community/empty_star.svg";
 
-export default function StarRating({ value, width }) {
+export default function StarRating({ value, width, ...rest }) {
   const filledStars = Math.min(Math.floor(value % 10), 5);
   const emptyStars = 5 - filledStars;
 
   return (
-    <StarWrapper>
+    <StarWrapper sx={{ ...rest }}>
       {[...Array(filledStars)].map((_, i) => (
         <Box component="img" key={`filled-${i}`} src={star} width={width} />
       ))}
