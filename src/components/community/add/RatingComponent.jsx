@@ -13,7 +13,7 @@ export default function RatingComponent({ value, onChange }) {
   return (
     <Container p={4} gap={4}>
       <Typography variant="title2">ㅇㅇ동 평점 선택</Typography>
-      <VerticalBox gap={4.5}>
+      <VerticalBox gap={3.5}>
         <RatingRow
           label="청결도"
           value={value.cleanness}

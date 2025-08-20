@@ -20,4 +20,5 @@ const Container = styled(VerticalBox)`
   border-radius: 24px;
   background: #fff;
   box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.15);
+  height: 200px;
 `;

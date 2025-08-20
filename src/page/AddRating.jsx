@@ -35,7 +35,12 @@ export default function AddRating() {
       </Typography>
       <PageTitle text="평점 작성" />
       <Grid container>
-        <Grid size={{ md: 4.8 }}>
+        <Grid
+          size={{ md: 4.8 }}
+          gap={3.5}
+          display="flex"
+          flexDirection="column"
+        >
           <Address
             value={formData.address}
             onChange={handleChange("address")}
