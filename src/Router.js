@@ -10,6 +10,7 @@ import Result from "./page/Result";
 import Loading from "./page/Loading";
 import Rating from "./page/Rating";
 import RatingDetail from "./page/RatingDetail";
+import AddRating from "./page/AddRating";
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
               path="/community/rating/detail/:id"
               element={<RatingDetail />}
             />
+            <Route path="/community/rating/add" element={<AddRating />} />
           </Routes>
         </Box>
       </Box>

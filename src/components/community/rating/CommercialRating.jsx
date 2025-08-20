@@ -153,7 +153,7 @@ export default function CommercialRating() {
           </Horizontal>
         </VerticalBox>
 
-        <WriteButton>
+        <WriteButton onClick={() => navigate("/community/rating/add")}>
           <Typography variant="h2">평점 작성</Typography>
         </WriteButton>
       </TotalInfoContainer>
