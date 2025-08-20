@@ -12,6 +12,8 @@ export default function SearchAddress({ handleClose }) {
   const [addressList, setAddressList] = useState([]);
   const theme = useTheme();
   const addressField = useReportField("address");
+
+  // eslint-disable-next-line no-unused-vars
   const [regionCode, setRegionCode] = useState(null); // 지역 코드 저장
 
   const handleInputValue = (e) => {

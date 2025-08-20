@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Horizontal, HorizontalBox, VerticalBox } from "../style/CommunalStyle";
 import { Box, Button, Grid, styled, Typography, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
@@ -26,6 +26,7 @@ const dummy = {
 
 export default function RatingDetail() {
   const theme = useTheme();
+  // eslint-disable-next-line
   const { id } = useParams();
 
   return (

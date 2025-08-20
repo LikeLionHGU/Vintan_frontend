@@ -4,6 +4,7 @@ import { Grid, Typography, useTheme } from "@mui/material";
 import Address from "../components/community/add/Address";
 import PageTitle from "../components/common/PageTitle";
 import RatingComponent from "../components/community/add/RatingComponent";
+import DetailReview from "../components/community/add/DetailReview";
 
 export default function AddRating() {
   const [formData, setFormData] = useState({
@@ -34,12 +35,12 @@ export default function AddRating() {
         홈 &gt; 커뮤니티 &gt; 평점 &gt; 평점 작성
       </Typography>
       <PageTitle text="평점 작성" />
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid
-          size={{ md: 4.8 }}
-          gap={3.5}
+          size={{ md: 5 }}
           display="flex"
           flexDirection="column"
+          justifyContent="space-between"
         >
           <Address
             value={formData.address}
@@ -47,7 +48,9 @@ export default function AddRating() {
           />
           <RatingComponent value={categoryRate} onChange={handleCategory} />
         </Grid>
-        <Grid size={{ md: 7.2 }}></Grid>
+        <Grid size={{ md: 7 }}>
+          <DetailReview value={formData} onChange={handleChange} />
+        </Grid>
       </Grid>
     </VerticalBox>
   );

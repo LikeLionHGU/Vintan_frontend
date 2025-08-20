@@ -1,6 +1,7 @@
 import { Box, Input, styled } from "@mui/material";
 import React from "react";
 import Search from "../../imgs/report/search.png";
+import { pxToRem } from "../../theme/typography";
 
 export default function TextInput({
   icon,
@@ -53,6 +54,10 @@ const StyledInput = styled(Input)(({ theme }) => ({
   padding: "8px 12px",
   outline: "none",
   "&:before, &:after": { display: "none" },
+  fontWeight: 400,
+  lineHeight: 1.6,
+  fontSize: pxToRem(15),
+  letterSpacing: "0.01em",
 
   "&:focus-within": {
     outline: `2px solid ${theme.palette.grey[800]}`,
