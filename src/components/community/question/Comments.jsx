@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   Divider,
+  Input,
   List,
   ListItem,
   ListItemText,
@@ -13,188 +14,140 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { VerticalBox } from "../../../style/CommunalStyle";
+import { HorizontalBox, VerticalBox } from "../../../style/CommunalStyle";
+import CornerDown from "../../../imgs/community/corner-down.svg";
+import { maskText } from "../../../utils/function";
+import Arrow from "../../../imgs/community/arrow-up.svg";
+import { pxToRem } from "../../../theme/typography";
 
-const dummy = [
-  {
-    id: 101,
-    userId: "expert",
-    content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-    date: "2024.08.21",
-  },
-  {
-    id: 102,
-    userId: "expert",
-    content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-    date: "2024.08.21",
-  },
-  {
-    id: 103,
-    userId: "expert",
-    content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-    date: "2024.08.21",
-  },
-];
-
-const dummy2 = {
-  title: "새로운 질문입니다.",
-  content: "이 지역의 임대료는 어느정도 수준인가요?",
+const dummy = {
+  id: 1,
+  title: "여기 상권 어떤가요?",
+  content:
+    "포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,",
+  userId: "user123",
+  date: "2024.08.20",
+  commentList: [
+    {
+      id: 101,
+      userId: "expert",
+      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
+      date: "2024.08.21",
+    },
+    {
+      id: 101,
+      userId: "expert",
+      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
+      date: "2024.08.21",
+    },
+    {
+      id: 101,
+      userId: "expert",
+      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
+      date: "2024.08.21",
+    },
+  ],
 };
 
 export default function Comments({ postId, open }) {
-  const [loaded, setLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
-  const [comments, setComments] = useState([]);
+  const [value, setValue] = useState("");
+  const [data, setData] = useState();
 
-  // 입력 상태
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
-  const canSubmit = useMemo(
-    () => author.trim().length > 0 && content.trim().length > 0,
-    [author, content]
-  );
-  const [submitting, setSubmitting] = useState(false);
-
-  // 열릴 때만 lazy-load
-  useEffect(() => {
-    if (!open || loaded || loading) return;
-    (async () => {
-      try {
-        setLoading(true);
-        setErr("");
-        // const data = await fetchComments(postId);
-        const data = dummy;
-        setComments(data || []);
-        setLoaded(true);
-      } catch (e) {
-        setErr(e.message || "불러오는 중 오류가 발생했어요");
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [open, loaded, loading, postId]);
-
-  const handleAdd = async () => {
-    if (!canSubmit || submitting) return;
-    // 낙관적 업데이트
-    const tempId = `temp-${Date.now()}`;
-    const optimistic = {
-      id: tempId,
-      author: author.trim(),
-      content: content.trim(),
-      createdAt: new Date().toISOString(),
-      _optimistic: true,
-    };
-    setComments((prev) => [optimistic, ...prev]);
-    setSubmitting(true);
-    setErr("");
-
-    try {
-      // const saved = await createComment(postId, {
-      //   author: optimistic.author,
-      //   content: optimistic.content,
-      // });
-      const saved = dummy2;
-      // temp 항목을 서버 응답으로 교체
-      setComments((prev) => prev.map((c) => (c.id === tempId ? saved : c)));
-      setAuthor("");
-      setContent("");
-    } catch (e) {
-      // 실패 시 롤백
-      setComments((prev) => prev.filter((c) => c.id !== tempId));
-      setErr(e.message || "댓글 작성 실패");
-    } finally {
-      setSubmitting(false);
-    }
+  const handleChange = (e) => {
+    setValue(e.target.value);
   };
 
+  useEffect(() => {
+    setData(dummy);
+  }, []);
+
   return (
-    <Container spacing={2}>
-      {/* 입력 폼
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-        <TextField
-          label="작성자"
-          size="small"
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-          sx={{ width: { xs: "100%", sm: 180 } }}
-        />
-        <TextField
-          label="댓글 내용"
-          size="small"
-          fullWidth
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && (e.ctrlKey || e.metaKey) && canSubmit) {
-              handleAdd();
-            }
-          }}
-          helperText="Cmd/Ctrl + Enter 로 등록"
-        />
-        <Button
-          variant="contained"
-          onClick={handleAdd}
-          disabled={!canSubmit || submitting}
-        >
-          {submitting ? "등록 중..." : "등록"}
-        </Button>
-      </Stack> */}
-
+    <>
       <Divider />
-
-      {/* 로딩/에러 */}
-      {loading && (
-        <Box display="flex" alignItems="center" gap={1}>
-          <CircularProgress size={18} />
-          <Typography variant="body2">댓글 불러오는 중…</Typography>
-        </Box>
-      )}
-      {err && (
-        <Typography color="error" variant="body2">
-          {err}
+      <Container spacing={2} pt={2}>
+        <Typography
+          variant="h2"
+          fontWeight={400}
+          sx={{ mb: 3, height: "120px", overflow: "auto" }}
+          pl={2}
+          pr={4}
+        >
+          {dummy.content}
         </Typography>
-      )}
-
-      {/* 댓글 리스트 */}
-      {!loading && comments.length === 0 && (
-        <Typography variant="body2" color="text.secondary">
-          아직 댓글이 없어요.
-        </Typography>
-      )}
-
-      <List disablePadding>
-        {comments.map((c) => (
-          <ListItem
-            key={c.id}
-            disableGutters
-            sx={{
-              opacity: c._optimistic ? 0.6 : 1,
-              alignItems: "flex-start",
-            }}
-          >
-            <ListItemText
-              primary={
-                <Stack direction="row" gap={1} alignItems="baseline">
-                  <Typography fontWeight={600}>{c.author}</Typography>
-                  <Typography variant="caption" color="text.secondary">
-                    {new Date(c.createdAt).toLocaleString()}
-                  </Typography>
-                </Stack>
-              }
-              secondary={
-                <Typography whiteSpace="pre-wrap">{c.content}</Typography>
-              }
+        <Divider />
+        <VerticalBox
+          gap={1}
+          mt={3}
+          maxHeight="200px"
+          overflow="auto"
+          pl={2}
+          pr={4}
+        >
+          {data?.commentList.map((item, index) => (
+            <Comment
+              key={index}
+              id={item.userId}
+              content={item.content}
+              date={item.date}
             />
-          </ListItem>
-        ))}
-      </List>
-    </Container>
+          ))}
+        </VerticalBox>
+        <HorizontalBox gap={1} mt={1}>
+          <CommentInput
+            placeholder="댓글을 입력해주세요"
+            value={value}
+            onChange={handleChange}
+          />
+          <SubmitButton>
+            <Box component="img" src={Arrow} />
+          </SubmitButton>
+        </HorizontalBox>
+      </Container>
+    </>
+  );
+}
+
+function Comment({ id, content, date }) {
+  return (
+    <HorizontalBox alignItems="center">
+      <HorizontalBox alignItems="center">
+        <Box component="img" src={CornerDown} mr={1} />
+        <Typography variant="h2" mr={2.5}>
+          {maskText(id)}
+        </Typography>
+        <Typography variant="body1">{content}</Typography>
+      </HorizontalBox>
+      <Typography variant="caption2">{date}</Typography>
+    </HorizontalBox>
   );
 }
 
 const Container = styled(VerticalBox)(({ theme }) => ({
   borderRadius: theme.spacing(1),
   backgroundColor: theme.palette.grey[50],
+}));
+
+const CommentInput = styled(Input)(({ theme }) => ({
+  width: "calc(100% - 64px)",
+  padding: "15px 21px",
+  outline: "none",
+  "&:before, &:after": { display: "none" },
+  fontWeight: 400,
+  lineHeight: 1.5,
+  fontSize: pxToRem(17),
+  letterSpacing: "0.01em",
+  background: "#EFEFEF",
+  borderRadius: "0 8px 8px 8px",
+
+  // "&:focus-within": {
+  //   outline: `2px solid ${theme.palette.grey[800]}`,
+  //   outlineOffset: "-1px",
+  // },
+}));
+
+const SubmitButton = styled(Button)(({ theme }) => ({
+  minWidth: theme.spacing(7),
+  minHeight: theme.spacing(7),
+  borderRadius: "6px",
+  backgroundColor: theme.palette.primary02.main,
 }));
