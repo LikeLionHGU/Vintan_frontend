@@ -156,9 +156,10 @@ const Container = styled(Box, {
     objectFit: "contain",
     height: "100%",
     width: "auto",
+    left: "5px",
     margin: 0,
     opacity: 0, // 기본은 숨김
-    transition: "opacity 240ms ease, transform 360ms ease",
+    transition: "opacity 250ms ease, transform 800ms ease",
     // transform: "scale(1.02)", // 살짝 확대된 상태에서 시작
   },
 
@@ -187,7 +188,7 @@ const Container = styled(Box, {
   --------------------- */
   "&:hover": {
     // transform: "scale(1.01)",
-    boxShadow: theme.shadows[8],
+    // boxShadow: theme.shadows[8],
 
     // gradient 오버레이 켜기
     ".gradient-overlay": {

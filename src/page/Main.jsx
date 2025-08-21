@@ -6,6 +6,8 @@ import MainButton from "../components/main/MainButton";
 import { ReactComponent as Report } from "../imgs/header/report.svg";
 import { ReactComponent as Community } from "../imgs/header/community.svg";
 import { ReactComponent as Arrow } from "../imgs/main/arrow.svg";
+import ReportHover from "../imgs/main/report-hover.svg";
+import CommunityHover from "../imgs/main/community-hover.svg";
 
 export default function Main() {
   const theme = useTheme();
@@ -40,6 +42,7 @@ export default function Main() {
               arrowIcon={Arrow}
               hoverGradient="linear-gradient(180deg, rgba(0, 255, 164, 0.15) 0%, rgba(0, 255, 164, 0.00) 100%);"
               link={"/report"}
+              hoverImageSrc={ReportHover}
             />
           </Grid>
           <Grid size={{ md: 4, xs: 12 }}>
@@ -51,6 +54,7 @@ export default function Main() {
               arrowIcon={Arrow}
               hoverGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.00) 100%)"
               link={"/community/rating"}
+              hoverImageSrc={CommunityHover}
             />
           </Grid>
         </Container>
