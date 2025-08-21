@@ -5,6 +5,7 @@ import PageTitle from "../components/community/PageTitle";
 import LegalDistrictPicker from "../components/community/rating/LegalDistrictPicker";
 import { FILES, SIDO } from "../utils/common";
 import QuestionTogleLists from "../components/community/question/QuestionTogleLists";
+import { useNavigate } from "react-router-dom";
 
 const dummy = [
   {
@@ -39,6 +40,7 @@ const dummy = [
 
 export default function Question() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [posts, setPosts] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -59,7 +61,7 @@ export default function Question() {
         예비 창업자를 위한 생생한 정보와 궁금증 해결을 질문 게시판에서
         확인하세요.
       </Typography>
-      <LocationContainer p={4} my={3}>
+      <LocationContainer p={4}>
         <Typography variant="title2" mb="22px">
           찾고 싶은 상권
         </Typography>
@@ -76,7 +78,7 @@ export default function Question() {
       </LocationContainer>
       <QuestionsContainer p={4}>
         <Typography variant="title2">ㅇㅇ동 상권 질문</Typography>
-        <SearchButton>
+        <SearchButton onClick={() => navigate("/community/question/add")}>
           <Typography variant="h2">질문 작성</Typography>
         </SearchButton>
         <QuestionTogleLists posts={posts} />

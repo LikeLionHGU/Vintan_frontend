@@ -12,6 +12,7 @@ import Rating from "./page/Rating";
 import RatingDetail from "./page/RatingDetail";
 import AddRating from "./page/AddRating";
 import Question from "./page/Question";
+import AddQuestion from "./page/AddQuestion";
 
 export default function Router() {
   return (
@@ -40,6 +41,7 @@ export default function Router() {
             />
             <Route path="/community/rating/add" element={<AddRating />} />
             <Route path="/community/question" element={<Question />} />
+            <Route path="/community/question/add" element={<AddQuestion />} />
           </Routes>
         </Box>
       </Box>
