@@ -43,6 +43,8 @@ export default function Question() {
   const navigate = useNavigate();
 
   const [posts, setPosts] = useState([]);
+
+  // eslint-disable-next-line no-unused-vars
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {

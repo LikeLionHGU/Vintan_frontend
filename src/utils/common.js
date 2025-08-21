@@ -3,12 +3,6 @@ import Report from "../imgs/header/report.svg";
 import Community from "../imgs/header/community.svg";
 import User from "../imgs/header/user.svg";
 import JoiningUser from "../imgs/header/joinig-user.svg";
-import Hat from "../imgs/report/hat.svg";
-import Tag from "../imgs/report/tag.svg";
-import Scissors from "../imgs/report/scissors.svg";
-import Music from "../imgs/report/music.svg";
-import Education from "../imgs/report/education.svg";
-import Health from "../imgs/report/health.svg";
 
 export const main_info = {
   title: "빈땅에, 기회의 문을 열다",

@@ -1,19 +1,6 @@
 // components/CommentsPanel.jsx
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Divider,
-  Input,
-  List,
-  ListItem,
-  ListItemText,
-  Stack,
-  styled,
-  TextField,
-  Typography,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, Divider, Input, styled, Typography } from "@mui/material";
 import { HorizontalBox, VerticalBox } from "../../../style/CommunalStyle";
 import CornerDown from "../../../imgs/community/corner-down.svg";
 import { maskText } from "../../../utils/function";

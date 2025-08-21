@@ -8,6 +8,7 @@ import { FILES, SIDO } from "../utils/common";
 
 export default function Rating() {
   const theme = useTheme();
+  // eslint-disable-next-line no-unused-vars
   const [selected, setSelected] = useState([]);
   return (
     <VerticalBox>
