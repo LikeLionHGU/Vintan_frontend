@@ -52,3 +52,10 @@ export function splitSentences(text) {
       </span>
     ));
 }
+
+export function maskText(text) {
+  if (text == null) return "***";
+  const chars = Array.from(String(text)); // 유니코드 안전 분해
+  const head = chars.slice(0, 3).join("");
+  return `${head}***`;
+}
