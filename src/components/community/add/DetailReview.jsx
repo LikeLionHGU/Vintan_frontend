@@ -1,10 +1,22 @@
 import { Button, styled, Typography } from "@mui/material";
 import React from "react";
-import { VerticalBox } from "../../../style/CommunalStyle";
+import { HorizontalBox, VerticalBox } from "../../../style/CommunalStyle";
 import TextInput from "../../common/TextInput";
 import Textarea from "../../common/Textarea";
 
 export default function DetailReview({ value, onChange }) {
+  const isAllValid = () => {
+    if (value.title === "") return false;
+    if (value.positive === "") return false;
+    if (value.negative === "") return false;
+    if (value.address === "") return false;
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (!isAllValid()) return;
+  };
+
   return (
     <Container p={4}>
       <Typography variant="title2" mb={3}>
@@ -40,7 +52,16 @@ export default function DetailReview({ value, onChange }) {
         resize="none"
         height="90px"
       />
-      <Button sx={{ mt: "30px" }}>클릭</Button>
+
+      <HorizontalBox justifyContent="flex-end">
+        <SubmitButton
+          isAllValid={isAllValid()}
+          disabled={!isAllValid}
+          onClick={handleSubmit}
+        >
+          작성 완료
+        </SubmitButton>
+      </HorizontalBox>
     </Container>
   );
 }
@@ -55,3 +76,16 @@ const Container = styled(VerticalBox)`
     margin-bottom: 12px;
   }
 `;
+
+const SubmitButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isAllValid",
+})(({ theme, isAllValid }) => ({
+  marginTop: "30px",
+  borderRadius: "6px",
+
+  width: "200px",
+  padding: "8px 20px",
+
+  backgroundColor: isAllValid ? "#009C64" : "#CCC",
+  color: isAllValid ? "#fff" : "#999",
+}));
