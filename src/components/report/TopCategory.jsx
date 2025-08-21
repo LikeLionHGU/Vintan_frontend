@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from "@mui/material";
+import { styled, Typography } from "@mui/material";
 import React from "react";
 import { Horizontal } from "../../style/CommunalStyle";
 
@@ -7,11 +7,10 @@ export default function TopCategory({ isSelected, icon, text, onClick }) {
     <Container
       gap={1}
       isSelected={isSelected}
-      px={1.5}
-      py={0.5}
+      px={2.5}
+      py={1}
       onClick={onClick}
     >
-      <Box component="img" src={icon} />
       <Typography variant="body2">{text}</Typography>
     </Container>
   );

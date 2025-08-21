@@ -8,9 +8,7 @@ const reportInitialValues = {
   area: 0.0, // 평 수
 
   // 여기부터 업종 관련 내용
-  bigDivision: "",
-  middleDivision: "",
-  smallDivision: "",
+  business: "",
   detail: "",
 };
 
