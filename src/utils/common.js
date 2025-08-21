@@ -79,6 +79,30 @@ export const non_member_navigation_list = [
   },
 ];
 
+export const SIDO = [
+  { label: "서울특별시", value: "seoul" },
+  { label: "부산광역시", value: "busan" },
+  { label: "대구광역시", value: "daegu" },
+  { label: "인천광역시", value: "incheon" },
+  { label: "광주광역시", value: "gwangju" },
+  { label: "대전광역시", value: "daejeon" },
+  { label: "울산광역시", value: "ulsan" },
+  { label: "세종특별자치시", value: "sejong" },
+  { label: "경기도", value: "gg" },
+  { label: "강원특별자치도", value: "gw" },
+  { label: "충청북도", value: "cb" },
+  { label: "충청남도", value: "cn" },
+  { label: "전북특별자치도", value: "jb" },
+  { label: "전라남도", value: "jn" },
+  { label: "경상북도", value: "gb" },
+  { label: "경상남도", value: "gn" },
+  { label: "제주특별자치도", value: "jj" },
+];
+
+export const FILES = Object.fromEntries(
+  SIDO.map((s) => [s.value, `/regions/${s.label}.json`])
+);
+
 export const divisionList = [
   {
     text: "음식",
