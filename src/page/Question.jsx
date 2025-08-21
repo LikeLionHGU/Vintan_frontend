@@ -78,9 +78,11 @@ export default function Question() {
       </LocationContainer>
       <QuestionsContainer p={4}>
         <Typography variant="title2">ㅇㅇ동 상권 질문</Typography>
-        <SearchButton onClick={() => navigate("/community/question/add")}>
-          <Typography variant="h2">질문 작성</Typography>
-        </SearchButton>
+        <HorizontalBox justifyContent="flex-end" mb={2}>
+          <SearchButton onClick={() => navigate("/community/question/add")}>
+            <Typography variant="h2">질문 작성</Typography>
+          </SearchButton>
+        </HorizontalBox>
         <QuestionTogleLists posts={posts} />
       </QuestionsContainer>
     </VerticalBox>
