@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { Vertical, VerticalBox } from "../style/CommunalStyle";
 import { Button, Typography } from "@mui/material";
 import { isValidUserData } from "../utils/function";
+import { loginUser } from "../api/common";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -11,14 +13,19 @@ export default function Login() {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmitBtn = () => {
-    console.log(formData);
+  const handleSubmitBtn = async () => {
+    const response = await loginUser(formData);
+    console.log(response);
+    if (response.data.isLogin === 1) {
+      navigate("/");
+    }
   };
 
   useMemo(() => {

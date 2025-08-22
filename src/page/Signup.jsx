@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { Vertical, VerticalBox } from "../style/CommunalStyle";
 import { Button, Typography } from "@mui/material";
 import { isValidUserData } from "../utils/function";
+import { signupUser } from "../api/common";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -12,17 +14,28 @@ export default function Signup() {
     password: "",
     passWordConfirm: "",
     email: "",
-    businessNumber: "",
+    businessNumber: null,
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmitBtn = () => {
-    console.log(formData);
+  const handleSubmitBtn = async () => {
+    const { passWordConfirm, ...rest } = formData;
+
+    const data = {
+      ...rest,
+      businessNumber:
+        rest.businessNumber === "" ? null : Number(rest.businessNumber),
+    };
+    const response = await signupUser(data);
+    if (response) {
+      navigate("/");
+    }
   };
 
   useMemo(() => {

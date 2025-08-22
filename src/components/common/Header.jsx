@@ -16,9 +16,14 @@ import { Horizontal, HorizontalBox } from "../../style/CommunalStyle";
 import Logo from "../../imgs/header/logo.svg";
 import Sidebar from "../../imgs/header/sidebar_button.svg";
 import CloseBtn from "../../imgs/header/close.svg";
-import { non_member_navigation_list } from "../../utils/common";
+import {
+  member_navigation_list,
+  non_member_navigation_list,
+} from "../../utils/common";
+import { useAuth } from "../../hooks/AuthWrapper";
 
 export default function Header() {
+  const { session } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -66,6 +71,7 @@ export default function Header() {
         open={open}
         onClose={toggleDrawer(false)}
         id="side-bar"
+        session={session}
       >
         <DrawerContent onClose={toggleDrawer(false)} />
       </Drawer>
@@ -73,8 +79,11 @@ export default function Header() {
   );
 }
 
-function DrawerContent({ onClose }) {
+function DrawerContent({ onClose, session }) {
   const navigate = useNavigate();
+
+  const isLogin = session?.isLogin === 1;
+  const list = isLogin ? member_navigation_list : non_member_navigation_list;
   return (
     <Box
       sx={{ width: "25vw", minWidth: "230px" }}
@@ -94,7 +103,7 @@ function DrawerContent({ onClose }) {
         sx={{ gap: "20px", display: "flex", flexDirection: "column" }}
         disablePadding
       >
-        {non_member_navigation_list.map(({ text, img, link }) => (
+        {list.map(({ text, img, link }) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => navigate(link)}

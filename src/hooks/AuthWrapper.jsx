@@ -9,22 +9,22 @@ export function useAuth() {
 }
 
 export default function AuthWrapper({ children }) {
-  const [isLogin, setIsLogin] = useState(null);
+  const [session, setSession] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkLogin = async () => {
       const session = await getSession();
-      setIsLogin(session);
+      setSession(session);
     };
     checkLogin();
   }, [navigate]);
 
-  if (isLogin === null) {
+  if (session === null) {
     return <div>Loading...</div>;
   }
 
   return (
-    <AuthContext.Provider value={{ isLogin }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ session }}>{children}</AuthContext.Provider>
   );
 }
