@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Create .env from secrets
+        run: |
+          echo "REACT_APP_ADDRESS_KEY=${{ secrets.REACT_APP_ADDRESS_KEY }}" >> .env
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
