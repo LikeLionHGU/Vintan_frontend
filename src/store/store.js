@@ -12,7 +12,7 @@ const reportInitialValues = {
   detail: "",
 };
 
-export const useReportStore = create((set) => ({
+export const useReportStore = create((set, get) => ({
   reportValues: { ...reportInitialValues },
 
   setReportValues: (name, value) => {
@@ -27,6 +27,15 @@ export const useReportStore = create((set) => ({
   },
 
   reset: () => set({ reportValues: { ...reportInitialValues } }),
+  isValid: () => {
+    const { address, detailAddress, area, business } = get().reportValues;
+    return (
+      area > 0.0 &&
+      address.trim() !== "" &&
+      detailAddress.trim() !== "" &&
+      business.trim() !== ""
+    );
+  },
 }));
 
 export const useReportField = (name) => {

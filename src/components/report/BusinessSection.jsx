@@ -6,7 +6,7 @@ import {
   HorizontalBox,
   VerticalBox,
 } from "../../style/CommunalStyle";
-import { useReportField } from "../../store/store";
+import { useReportField, useReportStore } from "../../store/store";
 import TopCategory from "./TopCategory";
 import { businessList } from "../../utils/common";
 import Tooltip from "../common/Tooltip";
@@ -17,6 +17,7 @@ export default function BusinessSection({ onSubmit }) {
   const business = useReportField("business");
   const detail = useReportField("detail");
   const [open, setOpen] = useState(false);
+  const isValid = useReportStore((s) => s.isValid());
 
   return (
     <>
@@ -74,7 +75,7 @@ export default function BusinessSection({ onSubmit }) {
 
         {/* 분석하기 버튼 */}
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <SubmitButton onClick={onSubmit}>
+          <SubmitButton onClick={onSubmit} disabled={!isValid}>
             <Typography variant="h2">분석하기</Typography>
           </SubmitButton>
         </Box>
@@ -90,11 +91,12 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   minHeight: "460px",
 }));
 
-const SubmitButton = styled(Button)(({ theme }) => ({
+const SubmitButton = styled(Button)(({ theme, disabled }) => ({
   borderRadius: "6px",
   border: `1px solid ${theme.palette.primary02.main}`,
-  backgroundColor: theme.palette.primary02.main,
   padding: "8px 20px",
-  color: "#fff",
   width: "200px",
+
+  backgroundColor: !disabled ? theme.palette.primary02.main : "#CCC",
+  color: !disabled ? "#fff" : "#999",
 }));

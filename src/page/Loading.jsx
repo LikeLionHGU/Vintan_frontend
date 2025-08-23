@@ -42,6 +42,7 @@ export default function Loading() {
     let aborted = false;
     (async () => {
       try {
+        console.log(state?.payload);
         // 실제 API 호출
         // const res = await axios.post("/api/report", state?.payload);
         // const id = res.data.reportId;
