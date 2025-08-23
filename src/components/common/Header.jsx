@@ -23,7 +23,6 @@ import {
 import { useAuth } from "../../hooks/AuthWrapper";
 
 export default function Header() {
-  const { session } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -71,7 +70,6 @@ export default function Header() {
         open={open}
         onClose={toggleDrawer(false)}
         id="side-bar"
-        session={session}
       >
         <DrawerContent onClose={toggleDrawer(false)} />
       </Drawer>
@@ -79,11 +77,13 @@ export default function Header() {
   );
 }
 
-function DrawerContent({ onClose, session }) {
+function DrawerContent({ onClose }) {
   const navigate = useNavigate();
 
+  const { session } = useAuth();
   const isLogin = session?.isLogin === 1;
   const list = isLogin ? member_navigation_list : non_member_navigation_list;
+
   return (
     <Box
       sx={{ width: "25vw", minWidth: "230px" }}

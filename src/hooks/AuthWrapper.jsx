@@ -15,7 +15,7 @@ export default function AuthWrapper({ children }) {
   useEffect(() => {
     const checkLogin = async () => {
       const session = await getSession();
-      setSession(session);
+      setSession(session.data);
     };
     checkLogin();
   }, [navigate]);
