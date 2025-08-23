@@ -38,7 +38,7 @@ export default function Router() {
               <Route path="/report/:reportId" element={<Result />} />
               <Route path="/community/rating" element={<Rating />} />
               <Route
-                path="/community/rating/detail/:id"
+                path="/community/rating/:code/detail/:id"
                 element={<RatingDetail />}
               />
               <Route path="/community/rating/add" element={<AddRating />} />

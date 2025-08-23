@@ -4,91 +4,19 @@ import { Horizontal, VerticalBox } from "../../../style/CommunalStyle";
 import StarRating from "./StarRating";
 import Star from "../../../imgs/community/star.svg";
 import { useNavigate } from "react-router-dom";
+import { formatNumber } from "../../../utils/function";
 
-const dummy = {
-  totalRate: 4.5,
-  clean: 3.6,
-  people: 3.2,
-  accessbility: 4.1,
-  rentFee: 2.1,
-  Blind: [
-    {
-      id: 1,
-      rate: 2.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-    {
-      id: 2,
-      rate: 3.5,
-      title: "젊은 사람들이 많은 상권",
-      date: "2001.03.22",
-      userId: "hyeokkiyaa",
-      location: "이빈땅·서울 강동구 상암동",
-    },
-  ],
-};
-
-export default function CommercialRating() {
+export default function CommercialRating({ data }) {
   const navigate = useNavigate();
+
   return (
     <Container p={4}>
-      <Typography variant="title2">상일동 상권 평점</Typography>
+      <Typography variant="title2">{data?.name} 상권 평점</Typography>
       <TotalInfoContainer position="relative">
         {/* total rate */}
         <VerticalBox gap={2.5} sx={{ width: "320px" }}>
-          <Typography variant="display2">{dummy.totalRate}</Typography>
-          <StarRating value={dummy.totalRate} />
+          <Typography variant="display2">{data?.totalRate}</Typography>
+          <StarRating value={data?.totalRate} />
         </VerticalBox>
 
         {/* category 별 rate */}
@@ -98,7 +26,7 @@ export default function CommercialRating() {
         >
           {/* 청결도 */}
           <Horizontal className="category-wrapper">
-            <Typography variant="h1">{dummy.clean}</Typography>
+            <Typography variant="h1">{formatNumber(data?.clean)}</Typography>
             <Box
               component="img"
               src={Star}
@@ -112,7 +40,7 @@ export default function CommercialRating() {
 
           {/* 유동인구, 활기 */}
           <Horizontal className="category-wrapper">
-            <Typography variant="h1">{dummy.people}</Typography>
+            <Typography variant="h1">{formatNumber(data?.people)}</Typography>
             <Box
               component="img"
               src={Star}
@@ -126,7 +54,9 @@ export default function CommercialRating() {
 
           {/* 접근성 */}
           <Horizontal className="category-wrapper">
-            <Typography variant="h1">{dummy.accessbility}</Typography>
+            <Typography variant="h1">
+              {formatNumber(data?.accessibility)}
+            </Typography>
             <Box
               component="img"
               src={Star}
@@ -140,7 +70,7 @@ export default function CommercialRating() {
 
           {/* 임대료 */}
           <Horizontal className="category-wrapper">
-            <Typography variant="h1">{dummy.rentFee}</Typography>
+            <Typography variant="h1">{formatNumber(data?.rentFee)}</Typography>
             <Box
               component="img"
               src={Star}
@@ -153,17 +83,25 @@ export default function CommercialRating() {
           </Horizontal>
         </VerticalBox>
 
-        <WriteButton onClick={() => navigate("/community/rating/add")}>
+        <WriteButton
+          onClick={() =>
+            navigate(
+              `/community/rating/add?code=${data.code}&name=${data.name}`
+            )
+          }
+        >
           <Typography variant="h2">평점 작성</Typography>
         </WriteButton>
       </TotalInfoContainer>
 
       <VerticalBox gap={4} py={6}>
-        {dummy.Blind.map((item, index) => (
+        {data?.blind.map((item, index) => (
           <BlindRate
             container
             key={index}
-            onClick={() => navigate(`/community/rating/detail/${item.id}`)}
+            onClick={() =>
+              navigate(`/community/rating/${data.code}/detail/${item.id}`)
+            }
           >
             <Grid gap="6px" size={{ md: 3 }}>
               <Typography variant="title3">평균 {item.rate}</Typography>

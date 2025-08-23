@@ -1,33 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Horizontal, HorizontalBox, VerticalBox } from "../style/CommunalStyle";
-import { Box, Button, Grid, styled, Typography, useTheme } from "@mui/material";
+import { Box, Grid, styled, Typography, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PageTitle from "../components/community/PageTitle";
 import StarRating from "../components/community/rating/StarRating";
 import Star from "../imgs/community/star.svg";
 import Line from "../imgs/community/line.png";
-
-const dummy = {
-  totalRate: 4.25,
-  blind: {
-    title: "양덕동 카페거리 솔직 후기",
-    positive: "분위기 좋은 카페가 많고 주차가 편리함.",
-    negative: "주말에는 사람이 너무 많아서 자리가 없음.",
-    address: "포항시 북구 양덕동",
-    date: "2024.08.19",
-    categoryRate: {
-      cleanness: 5,
-      people: 4,
-      reach: 5,
-      rentFee: 3,
-    },
-  },
-};
+import { getDetailReview } from "../api/community";
 
 export default function RatingDetail() {
   const theme = useTheme();
-  // eslint-disable-next-line
   const { id } = useParams();
+  const { code } = useParams();
+
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getDetailReview(code, id);
+      setData(response.data);
+    };
+    fetchData();
+  }, [code, id]);
 
   return (
     <VerticalBox height="100%">
@@ -37,13 +31,13 @@ export default function RatingDetail() {
       <PageTitle text="평점" isHere={true} />
       <RateWrapper container px={3} py={4}>
         <Grid size={{ md: 3 }}>
-          <Typography variant="title3">평균 {dummy.totalRate}</Typography>
-          <StarRating value={dummy.totalRate} width="24px" marginTop="6px" />
+          <Typography variant="title3">평균 {data?.totalRate}</Typography>
+          <StarRating value={data?.totalRate} width="24px" marginTop="6px" />
 
           <VerticalBox gap="6px" mt={4.5}>
             <Horizontal className="category-wrapper">
               <Typography variant="h1">
-                {dummy.blind.categoryRate.cleanness}.0
+                {data?.blind.categoryRate.cleanness}.0
               </Typography>
               <Box
                 component="img"
@@ -59,7 +53,7 @@ export default function RatingDetail() {
             {/* 유동인구, 활기 */}
             <Horizontal className="category-wrapper">
               <Typography variant="h1">
-                {dummy.blind.categoryRate.people}.0
+                {data?.blind.categoryRate.people}.0
               </Typography>
               <Box
                 component="img"
@@ -75,7 +69,7 @@ export default function RatingDetail() {
             {/* 접근성 */}
             <Horizontal className="category-wrapper">
               <Typography variant="h1">
-                {dummy.blind.categoryRate.reach}.0
+                {data?.blind.categoryRate.reach}.0
               </Typography>
               <Box
                 component="img"
@@ -91,7 +85,7 @@ export default function RatingDetail() {
             {/* 임대료 */}
             <Horizontal className="category-wrapper">
               <Typography variant="h1">
-                {dummy.blind.categoryRate.rentFee}.0
+                {data?.blind.categoryRate.rentFee}.0
               </Typography>
               <Box
                 component="img"
@@ -106,20 +100,20 @@ export default function RatingDetail() {
           </VerticalBox>
         </Grid>
         <Grid size={{ md: 7 }}>
-          <Typography variant="title3">"{dummy.blind.title}"</Typography>
+          <Typography variant="title3">"{data?.blind.title}"</Typography>
           <HorizontalBox gap="11px" alignItems="center" mt="11px" mb={3}>
-            <Typography variant="body1">{dummy.blind.address}</Typography>
+            <Typography variant="body1">{data?.blind.address}</Typography>
             <Box component="img" src={Line} height="18px" />
-            <Typography variant="body1">{dummy.blind.date}</Typography>
+            <Typography variant="body1">{data?.blind.date}</Typography>
           </HorizontalBox>
           <Typography variant="h2">장점</Typography>
           <Typography variant="body1" className="description">
-            {dummy.blind.positive}
+            {data?.blind.positive}
           </Typography>
 
           <Typography variant="h2">단점</Typography>
           <Typography variant="body1" className="description">
-            {dummy.blind.negative}
+            {data?.blind.negative}
           </Typography>
         </Grid>
         <Grid
@@ -131,12 +125,12 @@ export default function RatingDetail() {
           }}
           gap={1}
         >
-          <StyedButton buttonColor={theme.palette.primary02.main}>
+          {/* <StyedButton buttonColor={theme.palette.primary02.main}>
             <Typography variant="body2">수정</Typography>
           </StyedButton>
           <StyedButton buttonColor={theme.palette.error.main}>
             <Typography variant="body2">삭제</Typography>
-          </StyedButton>
+          </StyedButton> */}
         </Grid>
       </RateWrapper>
     </VerticalBox>
@@ -175,12 +169,12 @@ const RateWrapper = styled(Grid)(({ theme }) => ({
   },
 }));
 
-const StyedButton = styled(Button, {
-  shouldForwardProp: (prop) => prop !== "buttonColor",
-})(({ theme, buttonColor }) => ({
-  width: "70px",
-  borderRadius: "6px",
-  padding: "8px 20px",
-  border: `1px solid ${buttonColor}`,
-  color: buttonColor,
-}));
+// const StyedButton = styled(Button, {
+//   shouldForwardProp: (prop) => prop !== "buttonColor",
+// })(({ theme, buttonColor }) => ({
+//   width: "70px",
+//   borderRadius: "6px",
+//   padding: "8px 20px",
+//   border: `1px solid ${buttonColor}`,
+//   color: buttonColor,
+// }));

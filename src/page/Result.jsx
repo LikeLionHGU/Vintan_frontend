@@ -12,6 +12,8 @@ import { getAiReportById } from "../api/report";
 
 export default function Result() {
   const theme = useTheme();
+
+  // eslint-disable-next-line no-unused-vars
   const { reportId } = useProgressStore();
   const [reportData, setReportData] = useState();
 

@@ -4,7 +4,7 @@ import { HorizontalBox, VerticalBox } from "../../../style/CommunalStyle";
 import TextInput from "../../common/TextInput";
 import Textarea from "../../common/Textarea";
 
-export default function DetailReview({ value, onChange }) {
+export default function DetailReview({ value, onChange, name, handleSubmit }) {
   const isAllValid = () => {
     if (value.title === "") return false;
     if (value.positive === "") return false;
@@ -13,14 +13,10 @@ export default function DetailReview({ value, onChange }) {
     return true;
   };
 
-  const handleSubmit = () => {
-    if (!isAllValid()) return;
-  };
-
   return (
     <Container p={4}>
       <Typography variant="title2" mb={3}>
-        ㅇㅇ동 상세리뷰
+        {name} 상세리뷰
       </Typography>
       <Typography variant="h2">
         리뷰 제목을 최대 20자까지 입력해주세요

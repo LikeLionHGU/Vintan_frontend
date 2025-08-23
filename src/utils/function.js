@@ -79,3 +79,16 @@ export function maskText(text) {
   const head = chars.slice(0, 3).join("");
   return `${head}***`;
 }
+
+export function formatNumber(num) {
+  // 숫자인지 확인
+  if (typeof num !== "number") return "";
+
+  // 한 자리 숫자면 ".0" 붙이기
+  if (num >= 0 && num < 10) {
+    return `${num}.0`;
+  }
+
+  // 그 외는 그대로
+  return `${num}`;
+}

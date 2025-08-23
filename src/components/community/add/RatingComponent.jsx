@@ -9,10 +9,10 @@ import NotBad from "../../../imgs/community/notbad.svg";
 import Bad from "../../../imgs/community/bad.svg";
 import VeryBad from "../../../imgs/community/angry.svg";
 
-export default function RatingComponent({ value, onChange }) {
+export default function RatingComponent({ value, onChange, name }) {
   return (
     <Container p={4} gap={4}>
-      <Typography variant="title2">ㅇㅇ동 평점 선택</Typography>
+      <Typography variant="title2">{name} 평점 선택</Typography>
       <VerticalBox gap={3.5}>
         <RatingRow
           label="청결도"

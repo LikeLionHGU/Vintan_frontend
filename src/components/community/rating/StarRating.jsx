@@ -3,7 +3,7 @@ import { Box, styled } from "@mui/material";
 import star from "../../../imgs/community/star.svg";
 import emptyStar from "../../../imgs/community/empty_star.svg";
 
-export default function StarRating({ value, width, ...rest }) {
+export default function StarRating({ value = 0, width, ...rest }) {
   const filledStars = Math.min(Math.floor(value % 10), 5);
   const emptyStars = 5 - filledStars;
 

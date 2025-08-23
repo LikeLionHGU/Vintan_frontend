@@ -1,15 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Horizontal, HorizontalBox, VerticalBox } from "../style/CommunalStyle";
 import { Button, styled, Typography, useTheme } from "@mui/material";
 import PageTitle from "../components/community/PageTitle";
 import CommercialRating from "../components/community/rating/CommercialRating";
 import LegalDistrictPicker from "../components/community/rating/LegalDistrictPicker";
 import { FILES, SIDO } from "../utils/common";
+import { getAllReviewsByRegionId } from "../api/community";
 
 export default function Rating() {
   const theme = useTheme();
-  // eslint-disable-next-line no-unused-vars
-  const [selected, setSelected] = useState([]);
+
+  const [selected, setSelected] = useState([
+    {
+      code: "4711312200",
+      name: "북구 양덕동",
+      cityKey: "포항시",
+      sidoValue: "경북",
+    },
+  ]);
+  const [reviewsData, setReviewsData] = useState();
+
+  const handleSubmitClick = async () => {
+    const response = await getAllReviewsByRegionId(
+      Number(selected.length === 0 ? "4711312200" : selected[0].code)
+    );
+    const filteredData = {
+      ...response.data,
+      name: selected[0].name,
+      code: Number(selected[0].code),
+    };
+    setReviewsData(filteredData);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAllReviewsByRegionId(Number("4711312200")); // 포항시 북구 양덕동
+      const filteredData = {
+        ...response.data,
+        name: "북구 양덕동",
+        code: 4711312200,
+      };
+      setReviewsData(filteredData);
+    };
+    fetchData();
+  }, []);
   return (
     <VerticalBox>
       <Typography variant="caption1" color={theme.palette.grey[600]}>
@@ -28,7 +62,7 @@ export default function Rating() {
           찾고 싶은 상권
         </Typography>
         <Horizontal sx={{ justifyContent: "flex-end" }}>
-          <SearchButton sx={{ marginBottom: 2 }}>
+          <SearchButton sx={{ marginBottom: 2 }} onClick={handleSubmitClick}>
             <Typography variant="h2">검색</Typography>
           </SearchButton>
         </Horizontal>
@@ -38,7 +72,7 @@ export default function Rating() {
           onChange={setSelected}
         />
       </LocationContainer>
-      <CommercialRating />
+      <CommercialRating data={reviewsData} />
     </VerticalBox>
   );
 }
