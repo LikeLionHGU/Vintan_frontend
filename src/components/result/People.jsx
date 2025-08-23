@@ -1,19 +1,10 @@
-import { styled, Typography } from "@mui/material";
+import { styled, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { VerticalBox } from "../../style/CommunalStyle";
 import { splitSentences } from "../../utils/function";
 
-const peoplePattern = {
-  weekPattern: "평일 평균 5000명",
-
-  weekendPattern: "주말 평균 8000명",
-
-  aroundEffect: "오피스 빌딩, 아파트 단지",
-
-  ageGroup: "20-40대",
-};
-
-export default function People() {
+export default function People({ analysis }) {
+  const theme = useTheme();
   return (
     <Container px={5.5} py={7.5}>
       <Typography variant="title2" mb={1}>
@@ -30,32 +21,38 @@ export default function People() {
           <Typography variant="h2" className="title">
             평일 패턴
           </Typography>
-          <Typography>{splitSentences(peoplePattern.weekPattern)}</Typography>
+          <Typography>{splitSentences(analysis?.weekdayAnalysis)}</Typography>
         </Info>
 
         <Info gap="5px">
           <Typography variant="h2" className="title">
             주말 패턴
           </Typography>
-          <Typography>
-            {splitSentences(peoplePattern.weekendPattern)}
-          </Typography>
+          <Typography>{splitSentences(analysis?.weekendAnalysis)}</Typography>
         </Info>
 
         <Info gap="5px">
           <Typography variant="h2" className="title">
             주변 시설
           </Typography>
-          <Typography>{splitSentences(peoplePattern.aroundEffect)}</Typography>
+          <Typography>{splitSentences(analysis?.nearbyFacilities)}</Typography>
         </Info>
 
         <Info gap="5px">
           <Typography variant="h2" className="title">
             주 연령층
           </Typography>
-          <Typography>{splitSentences(peoplePattern.ageGroup)}</Typography>
+          <Typography>{splitSentences(analysis?.ageGroup)}</Typography>
         </Info>
       </VerticalBox>
+      <Summary px={4} py={3} mt={4}>
+        <Typography variant="h2" color={theme.palette.primary02.main}>
+          요약
+        </Typography>
+        <Typography variant="body1">
+          {splitSentences(analysis?.summary)}
+        </Typography>
+      </Summary>
     </Container>
   );
 }
@@ -75,4 +72,9 @@ const Info = styled(VerticalBox)(({ theme }) => ({
   ">.title": {
     color: theme.palette.primary02.main,
   },
+}));
+
+const Summary = styled(VerticalBox)(({ theme }) => ({
+  borderRadius: "16px",
+  backgroundColor: theme.palette.grey[100],
 }));

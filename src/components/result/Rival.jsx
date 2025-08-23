@@ -1,44 +1,9 @@
 import React from "react";
 import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
 import { styled, Typography, useTheme } from "@mui/material";
+import { splitSentences } from "../../utils/function";
 
-const dummy = {
-  summary: "반경 500m 내에 3개의 경쟁업체가 있으며, 평균 평점은 4.2점입니다.",
-  marketList: [
-    {
-      name: "화목정",
-      address: "장량중앙로 82-1",
-      content:
-        "'퓨전 중화' 컨셉(김피탕, 돌판해물짜장 등). 상권 인지도가 높으며, 가족/소모임 수요가 강함.",
-    },
-    {
-      name: "화목정",
-      address: "장량중앙로 82-1",
-      content:
-        "'퓨전 중화' 컨셉(김피탕, 돌판해물짜장 등). 상권 인지도가 높으며, 가족/소모임 수요가 강함.",
-    },
-    {
-      name: "화목정",
-      address: "장량중앙로 82-1",
-      content:
-        "'퓨전 중화' 컨셉(김피탕, 돌판해물짜장 등). 상권 인지도가 높으며, 가족/소모임 수요가 강함.",
-    },
-    {
-      name: "화목정",
-      address: "장량중앙로 82-1",
-      content:
-        "'퓨전 중화' 컨셉(김피탕, 돌판해물짜장 등). 상권 인지도가 높으며, 가족/소모임 수요가 강함.",
-    },
-    {
-      name: "화목정",
-      address: "장량중앙로 82-1",
-      content:
-        "'퓨전 중화' 컨셉(김피탕, 돌판해물짜장 등). 상권 인지도가 높으며, 가족/소모임 수요가 강함.",
-    },
-  ],
-};
-
-export default function Rival() {
+export default function Rival({ competitors, summary }) {
   const theme = useTheme();
 
   return (
@@ -55,7 +20,7 @@ export default function Rival() {
         id="market-list"
         mb={4}
       >
-        {dummy.marketList.map((item, index) => (
+        {competitors?.map((item, index) => (
           <RivalMarket p={3.5} key={index}>
             <Typography variant="caption1" className="index">
               경쟁업체 {String(index + 1).padStart(2, "0")}
@@ -79,7 +44,7 @@ export default function Rival() {
         <Typography variant="h2" color={theme.palette.primary02.main}>
           요약
         </Typography>
-        <Typography variant="body1">{dummy.summary}</Typography>
+        <Typography variant="body1">{splitSentences(summary)}</Typography>
       </Summary>
     </Container>
   );

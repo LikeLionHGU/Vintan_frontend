@@ -28,13 +28,23 @@ export const getAddressInfo = async (keyword) => {
   }
 };
 
-export const getAiReport = async (data, regionId) => {
+export const postAiReport = async (data, regionId) => {
   try {
     const url = new URL(baseUrl + reportControl + `/generate/${regionId}`);
     const response = await api.post(url, data);
     return response;
   } catch (error) {
     console.error("AI 리포트를 생성하는데에 오류가 발생했습니다", error);
+  }
+};
+
+export const getAiReportById = async (reportId) => {
+  try {
+    const url = new URL(baseUrl + reportControl + `/${reportId}`);
+    const response = await api.get(url);
+    return response;
+  } catch (error) {
+    console.error("report id로 보고서를 불러오는데에 문제가 발생했습니다");
   }
 };
 

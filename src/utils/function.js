@@ -41,16 +41,36 @@ export function isValidUserData(data) {
 export function splitSentences(text) {
   if (!text) return [];
 
-  return text
-    .split(".")
+  // 숫자+점은 제외하고 나머지 점에서 split
+  const sentences = text
+    .split(/(?<!\d)\.(?!\d)/)
     .map((s) => s.trim())
-    .filter(Boolean)
-    .map((s, idx) => (
+    .filter(Boolean);
+
+  return sentences.map((s, idx) => {
+    const parts = s.split(/(\*\*.*?\*\*)/g);
+    const startsWithNumber = /^\d+\./.test(s); // 숫자. 으로 시작하는지 체크
+
+    return (
       <span key={idx}>
-        {s}.
+        {/* 숫자.으로 시작하면 문장 시작 전에 줄 하나 더 추가 */}
+        {startsWithNumber && <br />}
+        {parts.map((part, i) => {
+          if (part.startsWith("**") && part.endsWith("**")) {
+            const inner = part.slice(2, -2);
+            return (
+              <span key={i} style={{ fontWeight: 600 }}>
+                {inner}
+              </span>
+            );
+          }
+          return part;
+        })}
+        .
         <br />
       </span>
-    ));
+    );
+  });
 }
 
 export function maskText(text) {

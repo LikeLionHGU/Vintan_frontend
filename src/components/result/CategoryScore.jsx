@@ -17,28 +17,28 @@ export default function CategoryScore({ finalScore }) {
       {
         key: "competitionScore",
         name: "경쟁 강도",
-        value: to20(finalScore.competitionScore),
+        value: to20(finalScore?.competitionScore),
       },
       {
         key: "floatingPopulationScore",
         name: "배후/유입",
-        value: to20(finalScore.floatingPopulationScore),
+        value: to20(finalScore?.floatingPopulationScore),
       },
       {
         key: "accessibilityScore",
         name: "접근성",
-        value: to20(finalScore.accessibilityScore),
+        value: to20(finalScore?.accessibilityScore),
       },
       {
         key: "overallReviewScore",
         name: "빈땅 창업 스퀘어",
-        value: to20(finalScore.overallReviewScore),
+        value: to20(finalScore?.overallReviewScore),
       },
     ];
   }, [finalScore]);
 
   return (
-    <div style={{ width: "100%", height: 330 }}>
+    <div style={{ width: "80%", height: 330 }}>
       <ResponsiveContainer>
         <BarChart
           data={data}

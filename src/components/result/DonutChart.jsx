@@ -1,13 +1,12 @@
 import { PieChart, Pie, Cell } from "recharts";
 
-const data = [
-  { name: "score", value: 82 },
-  { name: "rest", value: 100 - 82 },
-];
-
 const COLORS = ["#00FFA4", "#DDD"];
 
-export default function DonutChart() {
+export default function DonutChart({ score }) {
+  const data = [
+    { name: "score", value: score },
+    { name: "rest", value: 100 - score },
+  ];
   return (
     <PieChart width={340} height={340}>
       <Pie
@@ -42,7 +41,7 @@ export default function DonutChart() {
         fontWeight="bold"
         fill="#009C64"
       >
-        82점
+        {score}점
       </text>
     </PieChart>
   );

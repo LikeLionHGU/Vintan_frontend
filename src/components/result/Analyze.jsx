@@ -8,7 +8,7 @@ import { Box, styled, Typography, useTheme } from "@mui/material";
 import StarRating from "../community/rating/StarRating";
 import Star from "../../imgs/community/star.svg";
 
-export default function Analyze() {
+export default function Analyze({ analysis, addressName }) {
   const theme = useTheme();
 
   return (
@@ -24,7 +24,7 @@ export default function Analyze() {
       <HorizontalBox gap={2} mb={4} alignItems="stretch">
         <Wrapper>
           <Typography variant="title2" mb={3}>
-            양덕동 상권 평점
+            {addressName} 상권 평점
           </Typography>
           <HorizontalBox gap={3}>
             <VerticalBox
@@ -32,13 +32,21 @@ export default function Analyze() {
               marginTop="6px"
               borderRight="1px solid #ccc"
             >
-              <Typography variant="display2"> 4.0</Typography>
-              <StarRating value={4.0} width="32px" marginTop="6px" />
+              <Typography variant="display2">
+                {analysis?.averageCommunityScore}
+              </Typography>
+              <StarRating
+                value={analysis?.averageCommunityScore}
+                width="32px"
+                marginTop="6px"
+              />
             </VerticalBox>
 
             <VerticalBox gap="6px">
               <Horizontal className="category-wrapper">
-                <Typography variant="h1">3.1</Typography>
+                <Typography variant="h1">
+                  {analysis?.averageCleannessScore}
+                </Typography>
                 <Box
                   component="img"
                   src={Star}
@@ -52,7 +60,9 @@ export default function Analyze() {
 
               {/* 유동인구, 활기 */}
               <Horizontal className="category-wrapper">
-                <Typography variant="h1">4.2</Typography>
+                <Typography variant="h1">
+                  {analysis?.averagePopulationScore}
+                </Typography>
                 <Box
                   component="img"
                   src={Star}
@@ -66,7 +76,9 @@ export default function Analyze() {
 
               {/* 접근성 */}
               <Horizontal className="category-wrapper">
-                <Typography variant="h1">3.9</Typography>
+                <Typography variant="h1">
+                  {analysis?.averageReachabilityScore}
+                </Typography>
                 <Box
                   component="img"
                   src={Star}
@@ -80,7 +92,9 @@ export default function Analyze() {
 
               {/* 임대료 */}
               <Horizontal className="category-wrapper">
-                <Typography variant="h1">2.1</Typography>
+                <Typography variant="h1">
+                  {analysis?.averageRentFeeScore}
+                </Typography>
                 <Box
                   component="img"
                   src={Star}
@@ -99,13 +113,13 @@ export default function Analyze() {
             <Typography variant="h2" className="title">
               장점 요약
             </Typography>
-            <Typography>깨끗하고 넓은 공간, 친절한 직원</Typography>
+            <Typography>{analysis?.positive}</Typography>
           </Box>
           <Box>
             <Typography variant="h2" className="title" mt="20px">
               단점 요약
             </Typography>
-            <Typography>주말에 다소 혼잡함</Typography>
+            <Typography>{analysis?.negative}</Typography>
           </Box>
         </Wrapper>
       </HorizontalBox>
@@ -113,10 +127,7 @@ export default function Analyze() {
         <Typography variant="h2" color={theme.palette.primary02.main}>
           요약
         </Typography>
-        <Typography variant="body1">
-          전반적으로 긍정적인 평가가 많으며, 특히 청결도와 접근성에서 높은
-          점수를 받았습니다.
-        </Typography>
+        <Typography variant="body1">{analysis?.summary}</Typography>
       </Summary>
     </Container>
   );

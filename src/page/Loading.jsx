@@ -4,7 +4,7 @@ import { Vertical } from "../style/CommunalStyle";
 import { Box, LinearProgress, styled, Typography } from "@mui/material";
 import { useProgressStore } from "../store/store";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAiReport } from "../api/report";
+import { postAiReport } from "../api/report";
 
 export default function Loading() {
   const [progress, setProgress] = useState(0);
@@ -57,7 +57,7 @@ export default function Loading() {
 
         //console.log(filteredData, regionId);
 
-        const res = await getAiReport(filteredData, regionId);
+        const res = await postAiReport(filteredData, regionId);
         console.log(res);
         const id = res.data.reportId;
 

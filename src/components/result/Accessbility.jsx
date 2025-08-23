@@ -1,8 +1,9 @@
 import React from "react";
 import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
 import { styled, Typography, useTheme } from "@mui/material";
+import { splitSentences } from "../../utils/function";
 
-export default function Accessbility() {
+export default function Accessbility({ analysis }) {
   const theme = useTheme();
 
   return (
@@ -22,14 +23,16 @@ export default function Accessbility() {
               랜드마크/집객
             </Typography>
             <Typography variant="body2">
-              법원·검찰청 콤플렉스, 이마트계열 마트, 대형 카페(DT) 등.
+              {splitSentences(analysis?.landmark)}
             </Typography>
           </Access>
           <Access>
             <Typography variant="h2" className="title">
               주차시설
             </Typography>
-            <Typography variant="body2">공영 주차장 시간당 1000원</Typography>
+            <Typography variant="body2">
+              {splitSentences(analysis?.parkingPrice)}
+            </Typography>
           </Access>
         </VerticalBox>
         <VerticalBox gap={2}>
@@ -37,13 +40,17 @@ export default function Accessbility() {
             <Typography variant="h2" className="title">
               대중교통
             </Typography>
-            <Typography variant="body2">101번, 105번 버스</Typography>
+            <Typography variant="body2">
+              {splitSentences(analysis?.publicTransport)}
+            </Typography>
           </Access>
           <Access>
             <Typography variant="h2" className="title">
               역/광역
             </Typography>
-            <Typography variant="body2">장량동 주민센터 정류장</Typography>
+            <Typography variant="body2">
+              {splitSentences(analysis?.stationInfo)}
+            </Typography>
           </Access>
         </VerticalBox>
       </Horizontal>
@@ -52,8 +59,7 @@ export default function Accessbility() {
           요약
         </Typography>
         <Typography variant="body1">
-          주요 도로에 인접해 있어 차량 접근성이 우수하며, 버스 정류장이 도보 3분
-          거리에 위치합니다.
+          {splitSentences(analysis?.summary)}
         </Typography>
       </Summary>
     </Container>
