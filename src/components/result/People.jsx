@@ -4,16 +4,13 @@ import { VerticalBox } from "../../style/CommunalStyle";
 import { splitSentences } from "../../utils/function";
 
 const peoplePattern = {
-  weekPattern:
-    "점심(11:30–13:30) = 법원·검찰·행정/오피스 종사자 유입 + 인근 상가 종사자 식사 수요. 퇴근~저녁(18:00–21:00) = 아파트권 가족/지인 모임·회식 수요.",
+  weekPattern: "평일 평균 5000명",
 
-  weekendPattern:
-    "가족 동반 외식·기념일/소모임 비중↑, 체류시간 길어 회전은 느려짐.",
+  weekendPattern: "주말 평균 8000명",
 
-  aroundEffect: "반경 내 중·대단지 아파트 다수 → 저녁·주말 체류형 수요 안정적.",
+  aroundEffect: "오피스 빌딩, 아파트 단지",
 
-  movement:
-    "법원사거리·장량중앙로 축 카페/마트 등 ‘외식 → 커피/장보기’ 연계가 자연스러움.",
+  ageGroup: "20-40대",
 };
 
 export default function People() {
@@ -47,16 +44,16 @@ export default function People() {
 
         <Info gap="5px">
           <Typography variant="h2" className="title">
-            주변 시설 영향
+            주변 시설
           </Typography>
           <Typography>{splitSentences(peoplePattern.aroundEffect)}</Typography>
         </Info>
 
         <Info gap="5px">
           <Typography variant="h2" className="title">
-            연결 동선
+            주 연령층
           </Typography>
-          <Typography>{splitSentences(peoplePattern.movement)}</Typography>
+          <Typography>{splitSentences(peoplePattern.ageGroup)}</Typography>
         </Info>
       </VerticalBox>
     </Container>

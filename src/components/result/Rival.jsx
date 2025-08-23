@@ -1,11 +1,9 @@
 import React from "react";
 import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
 import { styled, Typography, useTheme } from "@mui/material";
-import { splitSentences } from "../../utils/function";
 
 const dummy = {
-  summary:
-    "경쟁업체는 총 6곳이며, 장량로·장량중앙로·법원로 축을 따라 ‘철판/스테이크/퓨전’ 성격의 경쟁이 이미 형성돼 있어요. 가성비 철판/스테이크’와 ‘패밀리형 퓨전’이 강합니다. 단체 수요를 선점한 체인(서가앤쿡)과 가성비 철판(오또상) 사이 ‘차별화된 철판 테이블 경험/단체룸’ 쪽이 공략 포인트예요.",
+  summary: "반경 500m 내에 3개의 경쟁업체가 있으며, 평균 평점은 4.2점입니다.",
   marketList: [
     {
       name: "화목정",
@@ -43,7 +41,6 @@ const dummy = {
 export default function Rival() {
   const theme = useTheme();
 
-  const sentences = splitSentences(dummy.summary);
   return (
     <Container px={5.5} py={7.5}>
       <Typography variant="title2" mb={1}>
@@ -82,7 +79,7 @@ export default function Rival() {
         <Typography variant="h2" color={theme.palette.primary02.main}>
           요약
         </Typography>
-        <Typography variant="body1">{sentences}</Typography>
+        <Typography variant="body1">{dummy.summary}</Typography>
       </Summary>
     </Container>
   );
