@@ -12,9 +12,8 @@ export default function SearchAddress({ handleClose }) {
   const [addressList, setAddressList] = useState([]);
   const theme = useTheme();
   const addressField = useReportField("address");
-
-  // eslint-disable-next-line no-unused-vars
-  const [regionCode, setRegionCode] = useState(null); // 지역 코드 저장
+  const regionIdField = useReportField("regionId");
+  const addressNameField = useReportField("addressName");
 
   const handleInputValue = (e) => {
     setValue(e.target.value);
@@ -23,6 +22,7 @@ export default function SearchAddress({ handleClose }) {
   const handleClick = async (addressInfo) => {
     addressField.onChange(addressInfo.roadAddr);
     const dataForJson = `${addressInfo.siNm} ${addressInfo.sggNm} ${addressInfo.emdNm}`;
+    addressNameField.onChange(`${addressInfo.sggNm} ${addressInfo.emdNm}`);
     await fetchRegionCode(dataForJson, addressInfo.siNm);
     handleClose();
   };
@@ -37,8 +37,7 @@ export default function SearchAddress({ handleClose }) {
       const found = allItems.find((item) => address.includes(item.name));
 
       if (found) {
-        setRegionCode(found.code);
-        console.log("지역 코드:", found.code);
+        regionIdField.onChange(Number(found.code));
       } else {
         console.warn("해당 주소에 맞는 code를 찾지 못했습니다.");
       }

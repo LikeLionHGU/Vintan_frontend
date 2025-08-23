@@ -4,6 +4,7 @@ import { Vertical } from "../style/CommunalStyle";
 import { Box, LinearProgress, styled, Typography } from "@mui/material";
 import { useProgressStore } from "../store/store";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getAiReport } from "../api/report";
 
 export default function Loading() {
   const [progress, setProgress] = useState(0);
@@ -18,7 +19,7 @@ export default function Loading() {
   }, [reset]);
 
   useEffect(() => {
-    const duration = 3500; // 전체 채우는 시간(ms)
+    const duration = 40000; // 전체 채우는 시간(ms)
     let frameId;
     const start = performance.now();
 
@@ -42,13 +43,26 @@ export default function Loading() {
     let aborted = false;
     (async () => {
       try {
-        console.log(state?.payload);
-        // 실제 API 호출
-        // const res = await axios.post("/api/report", state?.payload);
-        // const id = res.data.reportId;
+        const data = state?.payload;
+
+        const filteredData = {
+          address: data.address,
+          categoryCode: data.business,
+          pyeong: data.area,
+          userDetail: data.detail,
+          addressName: data.addressName,
+        };
+
+        const regionId = data.regionId;
+
+        //console.log(filteredData, regionId);
+
+        const res = await getAiReport(filteredData, regionId);
+        console.log(res);
+        const id = res.data.reportId;
 
         // 데모용 더미값
-        const id = 3;
+        // const id = await wait20SecReturn3();
 
         if (!aborted) setResponse(id);
       } catch (e) {

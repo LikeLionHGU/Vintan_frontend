@@ -13,17 +13,9 @@ export default function Report() {
   const data = useReportStore((state) => state.reportValues);
 
   const handleButtonClick = async () => {
-    console.log(data);
-
-    // navigate("/loading");
-
     try {
       useProgressStore.getState().reset();
-
-      // 2) 로딩 화면으로 이동 + payload 전달
       navigate("/loading", { state: { payload: data } });
-
-      // navigate(`/report/${3}`, { replace: true });
     } catch (error) {
       console.error(
         "데이터를 기반으로 AI보고서를 생성하는데에 문제가 발생했습니다.",
