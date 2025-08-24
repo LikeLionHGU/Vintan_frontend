@@ -7,24 +7,22 @@ import People from "../components/result/People";
 import Accessbility from "../components/result/Accessbility";
 import Analyze from "../components/result/Analyze";
 import Score from "../components/result/Score";
-import { useProgressStore } from "../store/store";
 import { getAiReportById } from "../api/report";
+import { useParams } from "react-router-dom";
 
 export default function Result() {
   const theme = useTheme();
 
-  // eslint-disable-next-line no-unused-vars
-  const { reportId } = useProgressStore();
+  const { reportId } = useParams();
   const [reportData, setReportData] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getAiReportById(1);
-      console.log(response);
+      const response = await getAiReportById(reportId);
       setReportData(response.data);
     };
     fetchData();
-  }, []);
+  }, [reportId]);
   return (
     reportData && (
       <VerticalBox sx={{ overflow: "auto" }}>
