@@ -38,7 +38,7 @@ export default function AddRating() {
   };
 
   const handleSubmit = async () => {
-    const data = { ...formData, categoryRate: categoryRate };
+    const data = { ...formData, categoryRate: categoryRate, addressName: name };
     const response = await postRegionReview(code, data);
     if (response.data.isSuccess === 1) {
       navigate("/community/rating");
