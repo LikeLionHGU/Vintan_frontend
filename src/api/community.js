@@ -55,3 +55,31 @@ export const getDetailReview = async (regionId, reviewId) => {
     );
   }
 };
+
+export const getAllQuestionsByRegionId = async (regionId) => {
+  try {
+    const url = new URL(baseUrl + blindControl + `/${regionId}/community/ask`);
+    const response = await api.get(url);
+    return response;
+  } catch (error) {
+    console.error(
+      "region id 기반 해당 지역의 질문을 불러오는데에 에러가 발생했습니다",
+      error
+    );
+  }
+};
+
+export const postRegionQuestion = async (regionId, data) => {
+  try {
+    const url = new URL(
+      baseUrl + blindControl + `/${regionId}/community/ask/write`
+    );
+    const response = await api.post(url, data);
+    return response;
+  } catch (error) {
+    console.error(
+      "region id 기반 해당 지역에 질문을 추가하는데에 에러가 발생했습니다",
+      error
+    );
+  }
+};

@@ -44,7 +44,10 @@ export default function Router() {
               />
               <Route path="/community/rating/add" element={<AddRating />} />
               <Route path="/community/question" element={<Question />} />
-              <Route path="/community/question/add" element={<AddQuestion />} />
+              <Route
+                path="/community/question/add/:regionId"
+                element={<AddQuestion />}
+              />
               <Route path="/mypage" element={<Mypage />} />
             </Routes>
           </Box>

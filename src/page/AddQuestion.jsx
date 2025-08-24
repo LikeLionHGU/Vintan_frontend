@@ -4,13 +4,21 @@ import { Button, styled, Typography, useTheme } from "@mui/material";
 import PageTitle from "../components/common/PageTitle";
 import TextInput from "../components/common/TextInput";
 import Textarea from "../components/common/Textarea";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { postRegionQuestion } from "../api/community";
 
 export default function AddQuestion() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
   });
+
   const theme = useTheme();
+  const { regionId } = useParams();
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("name");
+
+  const navigate = useNavigate();
 
   const isAllValid = () => {
     if (formData.title === "") return false;
@@ -23,8 +31,11 @@ export default function AddQuestion() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    const response = await postRegionQuestion(regionId, formData);
+    if (response.data.isSuccess === 1) {
+      navigate(`/community/question?code=${regionId}&name=${name}`);
+    }
   };
 
   return (
@@ -35,7 +46,7 @@ export default function AddQuestion() {
       <PageTitle text="질문 작성" />
       <Container p={4}>
         <Typography variant="title2" mb={3.5}>
-          ㅇㅇ동 질문 작성
+          {name} 질문 작성
         </Typography>
         <Typography variant="h2" mb={1.5}>
           질문 제목을 최대 20자까지 입력해주세요

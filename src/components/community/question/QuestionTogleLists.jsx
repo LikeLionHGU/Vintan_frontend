@@ -16,7 +16,7 @@ import { maskText } from "../../../utils/function";
 /**
  * props.posts: [{ id, title, commentCount? }, ...]
  */
-export default function QuestionTogleLists({ posts = [] }) {
+export default function QuestionTogleLists({ posts }) {
   const [expandedId, setExpandedId] = useState(null);
 
   const handleChange = (id) => (_e, isExpanded) =>
@@ -38,7 +38,7 @@ export default function QuestionTogleLists({ posts = [] }) {
           <Typography variant="h2">댓글수</Typography>
         </Grid>
       </InfoWrapper>
-      {posts.map((p) => (
+      {posts?.askList.map((p) => (
         <StyledAccordion
           key={p.id}
           expanded={expandedId === p.id}
