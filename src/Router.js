@@ -15,6 +15,7 @@ import Question from "./page/Question";
 import AddQuestion from "./page/AddQuestion";
 import AuthWrapper from "./hooks/AuthWrapper";
 import Mypage from "./page/Mypage";
+import ProtectedRoute from "./hooks/ProtectedRoute";
 
 export default function Router() {
   return (
@@ -34,7 +35,14 @@ export default function Router() {
               <Route path="/" element={<Main />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/report" element={<Report />} />
+              <Route
+                path="/report"
+                element={
+                  <ProtectedRoute>
+                    <Report />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/loading" element={<Loading />} />
               <Route path="/report/:reportId" element={<Result />} />
               <Route path="/community/rating" element={<Rating />} />
@@ -42,13 +50,31 @@ export default function Router() {
                 path="/community/rating/:code/detail/:id"
                 element={<RatingDetail />}
               />
-              <Route path="/community/rating/add" element={<AddRating />} />
+              <Route
+                path="/community/rating/add"
+                element={
+                  <ProtectedRoute>
+                    <AddRating />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/community/question" element={<Question />} />
               <Route
                 path="/community/question/add/:regionId"
-                element={<AddQuestion />}
+                element={
+                  <ProtectedRoute>
+                    <AddQuestion />
+                  </ProtectedRoute>
+                }
               />
-              <Route path="/mypage" element={<Mypage />} />
+              <Route
+                path="/mypage"
+                element={
+                  <ProtectedRoute>
+                    <Mypage />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </Box>
         </Box>
