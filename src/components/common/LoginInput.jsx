@@ -1,6 +1,12 @@
-import { Box, Input as MuiInput, styled, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Input as MuiInput,
+  styled,
+  Typography,
+} from "@mui/material";
 import React, { useId } from "react";
-import { VerticalBox } from "../../style/CommunalStyle";
+import { Horizontal, VerticalBox } from "../../style/CommunalStyle";
 export default function LoginInput({
   text,
   errorText = "에러 텍스트",
@@ -10,6 +16,9 @@ export default function LoginInput({
   value,
   onChange,
   isError = false,
+  isNeedCheck = false,
+  checkDuplicate,
+  isChecked = false,
   ...rest
 }) {
   const autoId = useId();
@@ -36,18 +45,30 @@ export default function LoginInput({
       </Typography>
 
       <VerticalBox gap={1}>
-        <Input
-          id={inputId}
-          disableUnderline
-          placeholder={placeholder}
-          fullWidth
-          value={value ?? ""}
-          onChange={onChange}
-          isError={isError}
-          inputProps={{ "aria-required": isEssential ? "true" : undefined }}
-          {...rest}
-        />
-
+        <Horizontal gap={1}>
+          <Input
+            id={inputId}
+            disableUnderline
+            placeholder={placeholder}
+            fullWidth
+            value={value ?? ""}
+            onChange={onChange}
+            isError={isError}
+            inputProps={{ "aria-required": isEssential ? "true" : undefined }}
+            {...rest}
+          />
+          {isNeedCheck && (
+            <CheckButton
+              sx={{ height: "48px", padding: "8px 0" }}
+              onClick={checkDuplicate}
+              isChecked={isChecked}
+            >
+              <Typography variant="body2">
+                {isChecked ? "확인완료" : "중복확인"}
+              </Typography>
+            </CheckButton>
+          )}
+        </Horizontal>
         <Typography
           variant="caption2"
           sx={{
@@ -81,4 +102,14 @@ const Input = styled(MuiInput, {
     }`,
     outlineOffset: "-1px",
   },
+}));
+
+const CheckButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isChecked",
+})(({ theme, isChecked }) => ({
+  borderRadius: "6px",
+  background: isChecked ? "#EFEFEF" : "transparent",
+  border: `1px solid ${isChecked ? "#999" : "#009C64"}`,
+  width: "100px",
+  color: isChecked ? "#999" : "#009C64",
 }));

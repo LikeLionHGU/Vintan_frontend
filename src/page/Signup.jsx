@@ -4,12 +4,13 @@ import styled from "@emotion/styled";
 import { Vertical, VerticalBox } from "../style/CommunalStyle";
 import { Button, Typography } from "@mui/material";
 import { isValidUserData } from "../utils/function";
-import { signupUser } from "../api/common";
+import { checkDuplicate, signupUser } from "../api/common";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
     id: "",
+    idConfirm: false,
     name: "",
     password: "",
     passWordConfirm: "",
@@ -17,15 +18,33 @@ export default function Signup() {
     businessNumber: null,
   });
   const [errors, setErrors] = useState({});
+  const [isAllValid, setIsAllValid] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (field === "id") {
+      setFormData((prev) => ({ ...prev, [field]: value, idConfirm: false }));
+    } else {
+      setFormData((prev) => ({ ...prev, [field]: value }));
+    }
+  };
+
+  const handleCheckButton = async () => {
+    const { id } = formData;
+    const response = await checkDuplicate(id);
+    if (response.data?.isDuplicated === 1) {
+      setErrors((prev) => ({
+        ...prev,
+        id: "이미 사용되고 있는 아이디 입니다",
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, idConfirm: true }));
+    }
   };
 
   const handleSubmitBtn = async () => {
-    const { passWordConfirm, ...rest } = formData;
+    const { passWordConfirm, idConfirm, ...rest } = formData;
 
     const data = {
       ...rest,
@@ -40,6 +59,9 @@ export default function Signup() {
 
   useMemo(() => {
     setErrors(isValidUserData(formData));
+    const isValid = Object.keys(isValidUserData(formData)).length === 0;
+
+    setIsAllValid(isValid && formData.idConfirm);
   }, [formData]);
 
   return (
@@ -57,6 +79,7 @@ export default function Signup() {
           isError={Boolean(errors.name)}
           errorText={errors.name}
         />
+
         <LoginInput
           text={"아이디"}
           isEssential={true}
@@ -65,7 +88,11 @@ export default function Signup() {
           onChange={handleChange("id")}
           isError={Boolean(errors.id)}
           errorText={errors.id}
+          isNeedCheck={true}
+          checkDuplicate={handleCheckButton}
+          isChecked={formData.idConfirm}
         />
+
         <LoginInput
           text={"비밀번호"}
           isEssential={true}
@@ -107,7 +134,7 @@ export default function Signup() {
         />
 
         {/* Submit Button */}
-        <SubmitButton onClick={handleSubmitBtn}>
+        <SubmitButton onClick={handleSubmitBtn} isAllValid={isAllValid}>
           <Typography variant="h2">가입하기</Typography>
         </SubmitButton>
       </Container>
@@ -125,9 +152,11 @@ const Container = styled(VerticalBox)(({ theme }) => ({
   backgroundColor: "#ffffff",
 }));
 
-const SubmitButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.primary02.main,
-  color: "#ffffff",
+const SubmitButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== "isAllValid",
+})(({ theme, isAllValid }) => ({
+  backgroundColor: isAllValid ? "#009C64" : "#CCC",
+  color: isAllValid ? "#fff" : "#999",
   borderRadius: "6px",
   width: "200px",
   padding: "8px 20px",

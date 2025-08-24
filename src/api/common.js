@@ -41,3 +41,14 @@ export const loginUser = async (formData) => {
     console.log("로그인하는데에 문제가 발생했습니다", error);
   }
 };
+
+export const checkDuplicate = async (userId) => {
+  try {
+    const url = new URL(baseUrl + userControl + `/duplicate/${userId}`);
+
+    const response = await api.get(url);
+    return response;
+  } catch (error) {
+    console.log("아이디 중복 체크하는데에 문제가 발생했습니다", error);
+  }
+};
