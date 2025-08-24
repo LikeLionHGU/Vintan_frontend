@@ -1,6 +1,10 @@
-import { Box, Button, Grid, styled, Typography } from "@mui/material";
+import { Box, Button, styled, Typography } from "@mui/material";
 import React from "react";
-import { Horizontal, VerticalBox } from "../../../style/CommunalStyle";
+import {
+  Horizontal,
+  HorizontalBox,
+  VerticalBox,
+} from "../../../style/CommunalStyle";
 import StarRating from "./StarRating";
 import Star from "../../../imgs/community/star.svg";
 import { useNavigate } from "react-router-dom";
@@ -97,28 +101,27 @@ export default function CommercialRating({ data }) {
       <VerticalBox gap={4} py={6}>
         {data?.blind.map((item, index) => (
           <BlindRate
-            container
             key={index}
             onClick={() =>
               navigate(`/community/rating/${data.code}/detail/${item.id}`)
             }
           >
-            <Grid gap="6px" size={{ md: 3 }}>
+            <VerticalBox gap="6px" sx={{ width: "320px" }}>
               <Typography variant="title3">평균 {item.rate}</Typography>
               <StarRating value={item.rate} width="24px" />
-            </Grid>
-            <Grid>
+            </VerticalBox>
+            <VerticalBox>
               <Typography variant="title3">{item.title}</Typography>
-              <Horizontal gap="11px">
+              <Horizontal gap="11px" sx={{ justifyContent: "flex-start" }}>
                 <Typography
                   variant="body1"
                   sx={{ borderRight: "1px solid #ccc", paddingRight: "11px" }}
                 >
-                  {item.location}
+                  {item.address}
                 </Typography>
                 <Typography variant="body1">{item.date}</Typography>
               </Horizontal>
-            </Grid>
+            </VerticalBox>
           </BlindRate>
         ))}
       </VerticalBox>
@@ -170,6 +173,6 @@ const WriteButton = styled(Button)`
   right: 0;
 `;
 
-const BlindRate = styled(Grid)`
+const BlindRate = styled(HorizontalBox)`
   cursor: pointer;
 `;
