@@ -7,10 +7,10 @@ export default function QuestionHistory({ data }) {
     <Container p={4}>
       <Typography variant="title2">내가 작성한 질문</Typography>
       <InfoWrapper container columns={8} py={1.5} mt={4}>
-        <Grid size={2}>
+        <Grid size={2.5}>
           <Typography variant="h2">제목</Typography>
         </Grid>
-        <Grid size={3} />
+        <Grid size={2.5} />
         <Grid size={1.5}>
           <Typography variant="h2">작성일</Typography>
         </Grid>
@@ -21,10 +21,10 @@ export default function QuestionHistory({ data }) {
       <>
         {data?.ask.map((item, index) => (
           <QuestionWrapper container columns={8} key={index} py={2}>
-            <Grid size={2}>
+            <Grid size={2.5}>
               <Typography variant="h2">{item.title}</Typography>
             </Grid>
-            <Grid size={3} />
+            <Grid size={2.5} />
             <Grid size={1.5}>
               <Typography variant="h2" fontWeight={400}>
                 {item.date}
