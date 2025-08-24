@@ -2,8 +2,15 @@ import React from "react";
 import { Vertical, VerticalBox } from "../../style/CommunalStyle";
 import { Box, Button, Grid, styled, Typography } from "@mui/material";
 import ProfileImg from "../../imgs/mypage/profile.svg";
+import { logout } from "../../api/mypage";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile({ data }) {
+  const navigate = useNavigate();
+  const handleLogoutClick = async () => {
+    const response = await logout();
+    if (response) navigate("/");
+  };
   return (
     <Container p={4}>
       <Typography variant="title2">프로필 정보</Typography>
@@ -12,7 +19,7 @@ export default function Profile({ data }) {
         <Typography variant="h1" mt={2}>
           {data?.id}
         </Typography>
-        <LogoutLink variant="caption2" mt={1}>
+        <LogoutLink variant="caption2" mt={1} onClick={handleLogoutClick}>
           로그아웃
         </LogoutLink>
         <div
