@@ -76,7 +76,11 @@ export default function QuestionTogleLists({ posts }) {
 
           <AccordionDetails sx={{ padding: 0 }}>
             {/* 열렸을 때만 댓글 패널이 데이터를 요청하도록 open prop 전달 */}
-            <Comments postId={p.id} open={expandedId === p.id} />
+            <Comments
+              postId={p.id}
+              open={expandedId === p.id}
+              regionId={posts?.code}
+            />
           </AccordionDetails>
         </StyledAccordion>
       ))}

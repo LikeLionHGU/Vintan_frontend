@@ -6,37 +6,9 @@ import CornerDown from "../../../imgs/community/corner-down.svg";
 import { maskText } from "../../../utils/function";
 import Arrow from "../../../imgs/community/arrow-up.svg";
 import { pxToRem } from "../../../theme/typography";
+import { getAllComments, postComments } from "../../../api/community";
 
-const dummy = {
-  id: 1,
-  title: "여기 상권 어떤가요?",
-  content:
-    "포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,포항시 북구 장량동에 카페 창업을 고민중입니다. 이 지역 상권에 대해 아시는 분 계신가요?,",
-  userId: "user123",
-  date: "2024.08.20",
-  commentList: [
-    {
-      id: 101,
-      userId: "expert",
-      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-      date: "2024.08.21",
-    },
-    {
-      id: 101,
-      userId: "expert",
-      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-      date: "2024.08.21",
-    },
-    {
-      id: 101,
-      userId: "expert",
-      content: "장량동은 최근에 유동인구가 많이 늘어난 곳이라 괜찮아보여요.",
-      date: "2024.08.21",
-    },
-  ],
-};
-
-export default function Comments({ postId, open }) {
+export default function Comments({ postId, open, regionId }) {
   const [value, setValue] = useState("");
   const [data, setData] = useState();
 
@@ -44,9 +16,24 @@ export default function Comments({ postId, open }) {
     setValue(e.target.value);
   };
 
+  const handleSubmit = async () => {
+    const formData = { comment: value };
+    console.log(formData);
+    const response = await postComments(regionId, postId, formData);
+    if (response.data.isSuccess === 1) {
+      const commentlist = await getAllComments(regionId, postId);
+      setData(commentlist.data);
+      setValue("");
+    }
+  };
+
   useEffect(() => {
-    setData(dummy);
-  }, []);
+    const fetchData = async () => {
+      const response = await getAllComments(regionId, postId);
+      setData(response.data);
+    };
+    fetchData();
+  }, [postId, regionId]);
 
   return (
     <>
@@ -59,7 +46,7 @@ export default function Comments({ postId, open }) {
           pl={2}
           pr={4}
         >
-          {dummy.content}
+          {data?.content}
         </Typography>
         <Divider />
         <VerticalBox
@@ -85,7 +72,7 @@ export default function Comments({ postId, open }) {
             value={value}
             onChange={handleChange}
           />
-          <SubmitButton>
+          <SubmitButton onClick={handleSubmit}>
             <Box component="img" src={Arrow} />
           </SubmitButton>
         </HorizontalBox>

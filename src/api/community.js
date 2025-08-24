@@ -83,3 +83,33 @@ export const postRegionQuestion = async (regionId, data) => {
     );
   }
 };
+
+export const getAllComments = async (regionId, postId) => {
+  try {
+    const url = new URL(
+      baseUrl + blindControl + `/${regionId}/community/ask/${postId}`
+    );
+    const response = await api.get(url);
+    return response;
+  } catch (error) {
+    console.error(
+      "post id 기반 해당 글의 질문리스트를 불러오는데에 에러가 발생했습니다",
+      error
+    );
+  }
+};
+
+export const postComments = async (regionId, postId, formData) => {
+  try {
+    const url = new URL(
+      baseUrl + blindControl + `/${regionId}/community/${postId}/ask/comment`
+    );
+    const response = await api.post(url, formData);
+    return response;
+  } catch (error) {
+    console.error(
+      "post id 기반 해당 글의 질문을 작성하는데에 에러가 발생했습니다",
+      error
+    );
+  }
+};
