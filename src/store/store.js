@@ -29,13 +29,11 @@ export const useReportStore = create((set, get) => ({
 
   reset: () => set({ reportValues: { ...reportInitialValues } }),
   isValid: () => {
-    const { address, detailAddress, area, business, regionId } =
-      get().reportValues;
+    const { address, area, business, regionId } = get().reportValues;
     return (
       area > 0.0 &&
       regionId !== 0 &&
       address.trim() !== "" &&
-      detailAddress.trim() !== "" &&
       business.trim() !== ""
     );
   },
