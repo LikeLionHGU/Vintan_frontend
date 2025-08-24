@@ -14,6 +14,7 @@ import AddRating from "./page/AddRating";
 import Question from "./page/Question";
 import AddQuestion from "./page/AddQuestion";
 import AuthWrapper from "./hooks/AuthWrapper";
+import Mypage from "./page/Mypage";
 
 export default function Router() {
   return (
@@ -44,6 +45,7 @@ export default function Router() {
               <Route path="/community/rating/add" element={<AddRating />} />
               <Route path="/community/question" element={<Question />} />
               <Route path="/community/question/add" element={<AddQuestion />} />
+              <Route path="/mypage" element={<Mypage />} />
             </Routes>
           </Box>
         </Box>

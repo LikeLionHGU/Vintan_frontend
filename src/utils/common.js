@@ -41,7 +41,7 @@ export const member_navigation_list = [
   {
     text: "마이페이지",
     img: User,
-    link: "/",
+    link: "/mypage",
   },
 ];
 
