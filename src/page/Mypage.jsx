@@ -17,6 +17,7 @@ export default function Mypage() {
     const fetchData = async () => {
       const response = await getMyPageInfo();
       setData(response.data);
+      console.log(response.data);
     };
     fetchData();
   }, []);
@@ -33,7 +34,7 @@ export default function Mypage() {
           </Grid>
           <Grid size={8}>
             <VerticalBox gap={4}>
-              {data.ask.length === 0 ? (
+              {data.aiReport.length === 0 ? (
                 <NoInfo
                   title="AI 보고서 히스토리"
                   isHistory={true}
