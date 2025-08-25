@@ -22,7 +22,7 @@ export default function Analyze({ analysis, addressName }) {
         자세한 내용은 빈땅 창업 스퀘어에서 확인 가능합니다.
       </Typography>
 
-      <HorizontalBox gap={2} mb={4} alignItems="stretch">
+      <HorizontalBox gap={2} mb={4} alignItems="stretch" mt={2}>
         <Wrapper>
           <Typography variant="title2" mb={3}>
             {addressName} 상권 평점
@@ -124,12 +124,12 @@ export default function Analyze({ analysis, addressName }) {
           </Box>
         </Wrapper>
       </HorizontalBox>
-      <Summary px={4} py={3}>
+      {/* <Summary px={4} py={3}>
         <Typography variant="h2" color={theme.palette.primary02.main}>
           요약
         </Typography>
         <Typography variant="body1">{analysis?.summary}</Typography>
-      </Summary>
+      </Summary> */}
     </Container>
   );
 }
