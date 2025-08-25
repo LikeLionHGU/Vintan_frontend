@@ -109,7 +109,9 @@ export default function CommercialRating({ data }) {
             }
           >
             <VerticalBox gap="6px" sx={{ width: "320px" }}>
-              <Typography variant="title3">평균 {item.rate}</Typography>
+              <Typography variant="title3">
+                평균 {formatNumber(item.rate)}
+              </Typography>
               <StarRating value={item.rate} width="24px" />
             </VerticalBox>
             <VerticalBox>
