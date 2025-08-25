@@ -5,7 +5,7 @@ import { Vertical, VerticalBox } from "../style/CommunalStyle";
 import { Button, Typography } from "@mui/material";
 import { isValidUserData } from "../utils/function";
 import { loginUser } from "../api/common";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -14,6 +14,9 @@ export default function Login() {
   });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
@@ -24,7 +27,7 @@ export default function Login() {
     const response = await loginUser(formData);
     console.log(response);
     if (response.data.isLogin === 1) {
-      navigate("/");
+      navigate(from, { replace: true });
     }
   };
 

@@ -40,7 +40,9 @@ export default function ProtectedRoute({ children }) {
               onClick={() =>
                 navigate("/login", {
                   replace: true,
-                  state: { from: location.pathname }, // 로그인 후 돌려보내기용
+                  state: {
+                    from: location.pathname + location.search + location.hash,
+                  },
                 })
               }
             >
