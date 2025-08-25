@@ -8,7 +8,7 @@ import Arrow from "../../../imgs/community/arrow-up.svg";
 import { pxToRem } from "../../../theme/typography";
 import { getAllComments, postComments } from "../../../api/community";
 
-export default function Comments({ postId, open, regionId }) {
+export default function Comments({ postId, open, regionId, isMypage = false }) {
   const [value, setValue] = useState("");
   const [data, setData] = useState();
 
@@ -66,16 +66,18 @@ export default function Comments({ postId, open, regionId }) {
             />
           ))}
         </VerticalBox>
-        <HorizontalBox gap={1} mt={1}>
-          <CommentInput
-            placeholder="댓글을 입력해주세요"
-            value={value}
-            onChange={handleChange}
-          />
-          <SubmitButton onClick={handleSubmit}>
-            <Box component="img" src={Arrow} />
-          </SubmitButton>
-        </HorizontalBox>
+        {!isMypage && (
+          <HorizontalBox gap={1} mt={1}>
+            <CommentInput
+              placeholder="댓글을 입력해주세요"
+              value={value}
+              onChange={handleChange}
+            />
+            <SubmitButton onClick={handleSubmit}>
+              <Box component="img" src={Arrow} />
+            </SubmitButton>
+          </HorizontalBox>
+        )}
       </Container>
     </>
   );
