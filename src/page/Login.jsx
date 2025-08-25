@@ -79,6 +79,11 @@ export default function Login() {
             onChange={handleChange("password")}
             isError={Boolean(errors.password)}
             errorText={errors.password}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmitBtn();
+              }
+            }}
           />
 
           {/* Submit Button */}
