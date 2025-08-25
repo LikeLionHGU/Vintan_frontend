@@ -44,7 +44,14 @@ export default function Router() {
                 }
               />
               <Route path="/loading" element={<Loading />} />
-              <Route path="/report/:reportId" element={<Result />} />
+              <Route
+                path="/report/:reportId"
+                element={
+                  <ProtectedRoute>
+                    <Result />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="/community/rating" element={<Rating />} />
               <Route
                 path="/community/rating/:code/detail/:id"

@@ -9,9 +9,12 @@ import Analyze from "../components/result/Analyze";
 import Score from "../components/result/Score";
 import { getAiReportById } from "../api/report";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../hooks/AuthWrapper";
 
 export default function Result() {
   const theme = useTheme();
+
+  const { session } = useAuth();
 
   const { reportId } = useParams();
   const [reportData, setReportData] = useState();
@@ -31,11 +34,11 @@ export default function Result() {
         </Typography>
         <PageTitle text="보고서 결과" />
         <Typography variant="body1">
-          지연님의 공실에 대한 AI 분석이 완료되었습니다. <br />
+          {session.name}님의 공실에 대한 AI 분석이 완료되었습니다. <br />
           아래 결과에서 확인하세요.
         </Typography>
 
-        <Vertical gap={4}>
+        <Vertical gap={4} mt={2}>
           <Rival
             competitors={reportData.competitors}
             summary={reportData.competitorSummary}
