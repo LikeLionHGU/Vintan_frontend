@@ -25,7 +25,14 @@ export default function ProtectedRoute({ children }) {
       <>
         <BasicModal
           open={open}
-          handleClose={() => setOpen(false)} // 닫기 동작 원하는대로 변경 가능
+          handleClose={() =>
+            navigate("/login", {
+              replace: true,
+              state: {
+                from: location.pathname + location.search + location.hash,
+              },
+            })
+          }
           modalWidth="530px"
           modalHeight="240px"
         >
