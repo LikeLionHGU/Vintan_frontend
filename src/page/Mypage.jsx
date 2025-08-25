@@ -22,7 +22,7 @@ export default function Mypage() {
   }, []);
   return (
     data && (
-      <VerticalBox>
+      <VerticalBox pb={4}>
         <Typography variant="caption1" color={theme.palette.grey[600]}>
           홈 &gt; 마이페이지
         </Typography>
