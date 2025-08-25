@@ -4,13 +4,13 @@ import {
   HorizontalBox,
   VerticalBox,
 } from "../../style/CommunalStyle";
-import { Box, styled, Typography, useTheme } from "@mui/material";
+import { Box, styled, Typography } from "@mui/material";
 import StarRating from "../community/rating/StarRating";
 import Star from "../../imgs/community/star.svg";
 import { formatNumber } from "../../utils/function";
 
 export default function Analyze({ analysis, addressName }) {
-  const theme = useTheme();
+  //const theme = useTheme();
 
   return (
     <Container px={5.5} py={7.5}>
@@ -170,7 +170,7 @@ const Wrapper = styled(VerticalBox)`
   }
 `;
 
-const Summary = styled(VerticalBox)(({ theme }) => ({
-  borderRadius: "16px",
-  backgroundColor: theme.palette.grey[100],
-}));
+// const Summary = styled(VerticalBox)(({ theme }) => ({
+//   borderRadius: "16px",
+//   backgroundColor: theme.palette.grey[100],
+// }));
