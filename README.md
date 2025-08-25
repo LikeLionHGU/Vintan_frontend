@@ -44,6 +44,7 @@
 > Charts: Chart.js, Recharts <br/>
 > Deployment: Firebase Hosting <br/>
 
+<br/>
 
 ## 메인 페이지
 > <b>메인 페이지</b> <br>
@@ -55,6 +56,8 @@
     <td><img width="1440" height="815" alt="image" src="https://github.com/user-attachments/assets/8f368c06-0768-4b62-a5c5-2f298d115936" /></td>
   </tr>
 </table>
+
+<br/>
 
 ## 로그인 및 회원가입 페이지
 > <b>로그인 및 회원가입 페이지</b> <br>
@@ -68,7 +71,7 @@
   </tr>
 </table>
 
-
+<br/>
 
 ## 리포트 생성 페이지
 > <b>AI 리포트 생성 페이지</b> <br>
@@ -82,6 +85,7 @@
   </tr>
 </table>
 
+<br/>
 
 ## 로딩 페이지
 > <b>로딩 페이지</b> <br>
@@ -115,20 +119,41 @@
   </tr>
 </table>
 
+<br/>
+
+## 창업스퀘어 평점 페이지
+> <b>창업스퀘어 평점 페이지</b> <br>
+> 지역 상권 평점 페이지입니다. 원하는 지역 선택 후 해당 지역의 평점을 볼 수 있습니다
+
+<table>
+  <tr>
+    <td><img width="1440" height="811" alt="image" src="https://github.com/user-attachments/assets/d2a77069-87ae-4187-a8d4-4e312f10c04c" /></td>
+    <td><img width="1440" height="813" alt="image" src="https://github.com/user-attachments/assets/d4ff25bc-4eeb-4520-b4cb-008af9f05c6a" /></td>
+    <td><img width="1440" height="814" alt="image" src="https://github.com/user-attachments/assets/81d72a02-8103-4b0b-8b6d-9444af3b6b93" /></td>
+  </tr>
+</table>
+
+<br/>
+
+## 창업스퀘어 평점 페이지
+> <b>창업스퀘어 질문 페이지</b> <br>
+> 지역 상권 질문 페이지입니다. 원하는 지역 선택 후 해당 지역에 질문과 댓글을 남길 수 있습니다. <br/>
+> 댓글은 토글 형식으로 질문 클릭 시 보여집니다.
+
+<table>
+  <tr>
+    <td><img width="1440" height="811" alt="image" src="https://github.com/user-attachments/assets/49317ad8-19b2-4d62-80d6-2863bfb121b8" /></td>
+    <td><img width="1440" height="813" alt="image" src="https://github.com/user-attachments/assets/39697147-c683-43ea-aa54-f3bd21de598a" /></td>
+  </tr>
+</table>
+
+<br/>
+
+## 마이페이지
+> <b>마이페이지</b> <br>
+> 서비스 마이페이지입니다. 해당 페이지에서 분석한 보고서, 작성한 평점과 질문 리스트를 볼 수 있습니다. 
+
+<img width="1440" height="813" alt="image" src="https://github.com/user-attachments/assets/6581a93c-2b20-42e4-b294-76f5157204ac" />
 
 
 
-> <b>이슈 체크 페이지</b> <br>
-> 사용자가 선택한 상품과 관련된 최신 이슈 키워드를 GPT 기반으로 분석해 워드클라우드 형태로 시각화합니다. 해당 이슈와 연관된 주요 뉴스 기사를 제공하며, 각 버튼 클릭 시 외부 뉴스 페이지로 이동할 수 있도록 연결되어 있습니다.
-
-<img width="1437" height="810" alt="image" src="https://github.com/user-attachments/assets/51c4b4f9-437b-4d48-af65-0f4a0ea463a9" />
-
-<br>
-
-<br>
-
-> <b>농산물 추천 페이지</b> <br>
-> 사용자의 소비 패턴과 구매 이력을 바탕으로 , 가성비 높은 농산물 판매 마켓은 4 곳 이상을 추천합니다. 카드를 클릭하면 해당 마켓의 상세 페이지로 연결되어, 더 많은 정보와 상품을 확인할 수 있습니다.
-
-
-<img width="1434" height="798" alt="image" src="https://github.com/user-attachments/assets/250ab75b-c439-478a-85b4-9e49d5bf9eb1" />
