@@ -20,10 +20,12 @@ export default function NoInfo({
         </Typography>
       )}
       <Vertical>
-        <Typography variant="display2" color="#999">
+        <Typography variant="display2" color="#999" mt={2}>
           {text}
         </Typography>
-        <StyledButton onClick={() => navigate(link)}>{linkText}</StyledButton>
+        <StyledButton onClick={() => navigate(link)} sx={{ mt: 6 }}>
+          <Typography variant="h2">{linkText}</Typography>
+        </StyledButton>
       </Vertical>
     </Container>
   );
@@ -39,4 +41,5 @@ const StyledButton = styled(Button)`
   padding: 8px 32px;
   border-radius: 6px;
   background: #009c64;
+  color: #fff;
 `;

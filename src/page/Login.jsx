@@ -29,7 +29,7 @@ export default function Login() {
     const response = await loginUser(formData);
     if (response?.data?.isLogin === 1) {
       navigate(from, { replace: true });
-    } else if (response === undefined) {
+    } else if (response?.data.isLogin === 0) {
       setOpen(true);
     }
   };
@@ -52,7 +52,9 @@ export default function Login() {
               유효하지 않은 아이디, 혹은 비밀번호 입니다. <br />
               다시 로그인해주세요
             </Typography>
-            <SubmitButton onClick={() => setOpen(false)}>확인</SubmitButton>
+            <SubmitButton onClick={() => setOpen(false)}>
+              <Typography variant="h2">확인</Typography>
+            </SubmitButton>
           </Vertical>
         </BasicModal>
       )}

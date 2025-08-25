@@ -134,7 +134,11 @@ export default function Signup() {
         />
 
         {/* Submit Button */}
-        <SubmitButton onClick={handleSubmitBtn} isAllValid={isAllValid}>
+        <SubmitButton
+          onClick={handleSubmitBtn}
+          isAllValid={isAllValid}
+          disabled={!isAllValid}
+        >
           <Typography variant="h2">가입하기</Typography>
         </SubmitButton>
       </Container>

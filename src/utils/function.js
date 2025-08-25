@@ -35,6 +35,16 @@ export function isValidUserData(data) {
     next.businessNumber = "사업자등록번호는 숫자 10자리여야 합니다.";
   }
 
+  if (
+    !data.id ||
+    !data.name ||
+    !data.password ||
+    !data.email ||
+    !data.passwordConfirm
+  ) {
+    next.error = "다 안채워졌어여";
+  }
+
   return next;
 }
 
@@ -81,12 +91,18 @@ export function maskText(text) {
 }
 
 export function formatNumber(num) {
-  if (typeof num !== "number") return "";
+  if (typeof num !== "number" || Number.isNaN(num)) return "";
 
   // 정수이면서 0~9 사이일 때만 ".0" 붙이기
   if (Number.isInteger(num) && num >= 0 && num < 10) {
     return `${num}.0`;
   }
 
-  return `${num}`;
+  // 소수는 둘째 자리에서 반올림하되, 불필요한 0은 제거
+  if (!Number.isInteger(num)) {
+    return String(Number(num.toFixed(2)));
+  }
+
+  // 그 외 정수는 그대로
+  return String(num);
 }

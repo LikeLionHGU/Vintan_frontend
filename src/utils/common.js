@@ -16,7 +16,7 @@ export const main_info = {
   },
 
   community: {
-    title: "커뮤니티",
+    title: "창업스퀘어",
     description:
       "실제 창업하신 사장님들의 생생한 상권 후기를 확인하고 질문해보세요!",
   },
@@ -34,7 +34,7 @@ export const member_navigation_list = [
     link: "/report",
   },
   {
-    text: "커뮤니티",
+    text: "창업스퀘어",
     img: Community,
     link: "/community/rating",
   },
@@ -57,7 +57,7 @@ export const non_member_navigation_list = [
     link: "/report",
   },
   {
-    text: "커뮤니티",
+    text: "창업스퀘어",
     img: Community,
     link: "/community/rating",
   },

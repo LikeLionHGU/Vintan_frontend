@@ -7,6 +7,7 @@ import RatingHistory from "../components/mypage/RatingHistory";
 import ReportHistory from "../components/mypage/ReportHistory";
 import { getMyPageInfo } from "../api/mypage";
 import QuestionHistory from "../components/mypage/QuestionHistory";
+import NoInfo from "../components/mypage/NoInfo";
 
 export default function Mypage() {
   const theme = useTheme();
@@ -32,9 +33,37 @@ export default function Mypage() {
           </Grid>
           <Grid size={8}>
             <VerticalBox gap={4}>
-              <ReportHistory data={data} />
-              <RatingHistory data={data} />
-              <QuestionHistory data={data} />
+              {data.ask.length === 0 ? (
+                <NoInfo
+                  title="AI 보고서 히스토리"
+                  isHistory={true}
+                  text="분석한 보고서가 없습니다"
+                  linkText="AI 보고서 분석하러 가기"
+                  link="/report"
+                />
+              ) : (
+                <ReportHistory data={data} />
+              )}
+              {data.blind === null ? (
+                <NoInfo
+                  title="내가 작성한 평점"
+                  text="작성한 평점이 없습니다"
+                  linkText="평점 작성하러 가기"
+                  link="/community/rating"
+                />
+              ) : (
+                <RatingHistory data={data} />
+              )}
+              {data.ask.length === 0 ? (
+                <NoInfo
+                  title="내가 작성한 질문"
+                  text="작성한 질문이 없습니다"
+                  linkText="질문하러 가기"
+                  link="/community/question"
+                />
+              ) : (
+                <QuestionHistory data={data} />
+              )}
             </VerticalBox>
           </Grid>
         </Grid>

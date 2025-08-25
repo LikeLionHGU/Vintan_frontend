@@ -19,7 +19,9 @@ export default function CommercialRating({ data }) {
       <TotalInfoContainer position="relative">
         {/* total rate */}
         <VerticalBox gap={2.5} sx={{ width: "320px" }}>
-          <Typography variant="display2">{data?.totalRate}</Typography>
+          <Typography variant="display2">
+            {formatNumber(data?.totalRate)}
+          </Typography>
           <StarRating value={data?.totalRate} />
         </VerticalBox>
 
