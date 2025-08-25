@@ -53,7 +53,7 @@ export default function Signup() {
     };
     const response = await signupUser(data);
     if (response) {
-      navigate("/");
+      navigate("/login");
     }
   };
 
