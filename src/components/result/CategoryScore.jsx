@@ -8,31 +8,28 @@ import {
   LabelList,
 } from "recharts";
 
-// 100점 → 20점 환산 함수
-const to20 = (v) => Math.round((v / 100) * 20);
-
 export default function CategoryScore({ finalScore }) {
   const data = useMemo(() => {
     return [
       {
         key: "competitionScore",
         name: "경쟁 강도",
-        value: to20(finalScore?.competitionScore),
+        value: finalScore?.competitionScore,
       },
       {
         key: "floatingPopulationScore",
         name: "배후/유입",
-        value: to20(finalScore?.floatingPopulationScore),
+        value: finalScore?.floatingPopulationScore,
       },
       {
         key: "accessibilityScore",
         name: "접근성",
-        value: to20(finalScore?.accessibilityScore),
+        value: finalScore?.accessibilityScore,
       },
       {
         key: "overallReviewScore",
         name: "빈땅 창업 스퀘어",
-        value: to20(finalScore?.overallReviewScore),
+        value: finalScore?.overallReviewScore,
       },
     ];
   }, [finalScore]);

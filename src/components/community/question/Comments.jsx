@@ -18,7 +18,7 @@ export default function Comments({ postId, open, regionId, isMypage = false }) {
 
   const handleSubmit = async () => {
     const formData = { comment: value };
-    console.log(formData);
+
     const response = await postComments(regionId, postId, formData);
     if (response.data.isSuccess === 1) {
       const commentlist = await getAllComments(regionId, postId);

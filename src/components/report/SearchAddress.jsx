@@ -32,14 +32,47 @@ export default function SearchAddress({ handleClose }) {
       const response = await fetch(`/regions/${sido}.json`);
       const data = await response.json();
 
-      // data = { "포항시": [ {code, name}, ... ] }
-      const allItems = Object.values(data).flat(); // [[...], [...]] → 하나의 배열로
-      const found = allItems.find((item) => address.includes(item.name));
+      // 1) 공백/트림 정규화
+      const norm = (s) => s?.replace(/\s+/g, " ").trim() || "";
+      const normAddr = norm(address);
+
+      // 2) 전체 아이템 배열로 평탄화
+      const allItems = Object.values(data).flat();
+
+      // 보조: 점수 함수 (단어 수와 길이로 구체성 점수)
+      const score = (name) => {
+        const tokens = norm(name).split(" ").length; // 단어 수: 북구(1) < 북구 양덕동(2)
+        return tokens * 1000 + norm(name).length; // 단어 수 > 길이
+      };
+
+      // 3) 1순위: 주소가 해당 name으로 "끝나는" 항목(풀매칭) 찾기
+      let found = allItems.find((it) => normAddr.endsWith(norm(it.name)));
+
+      // 4) 2순위: 포함되는 모든 후보 중에서 가장 구체적인 것(점수 높은 것)
+      if (!found) {
+        const candidates = allItems.filter((it) =>
+          normAddr.includes(norm(it.name))
+        );
+        if (candidates.length) {
+          candidates.sort((a, b) => score(b.name) - score(a.name));
+          found = candidates[0];
+        }
+      }
+
+      // 5) 3순위: 마지막 단어/두 단어로 재시도 (데이터에 정확히 그 형태가 있을 때)
+      if (!found) {
+        const parts = normAddr.split(" ");
+        const last1 = parts.slice(-1).join(" "); // 예: "양덕동"
+        const last2 = parts.slice(-2).join(" "); // 예: "북구 양덕동"
+        found =
+          allItems.find((it) => norm(it.name) === last2) ||
+          allItems.find((it) => norm(it.name) === last1);
+      }
 
       if (found) {
-        regionIdField.onChange(Number(found.code));
+        regionIdField.onChange(parseInt(found.code, 10));
       } else {
-        console.warn("해당 주소에 맞는 code를 찾지 못했습니다.");
+        console.warn("해당 주소에 맞는 code를 찾지 못했습니다.", { address });
       }
     } catch (err) {
       console.error("지역 코드 조회 중 오류:", err);

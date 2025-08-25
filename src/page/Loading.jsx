@@ -58,7 +58,7 @@ export default function Loading() {
         //console.log(filteredData, regionId);
 
         const res = await postAiReport(filteredData, regionId);
-        console.log(res);
+
         const id = res.data.reportId;
 
         // 데모용 더미값

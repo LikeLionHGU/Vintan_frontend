@@ -7,6 +7,7 @@ import {
 import { Box, styled, Typography, useTheme } from "@mui/material";
 import StarRating from "../community/rating/StarRating";
 import Star from "../../imgs/community/star.svg";
+import { formatNumber } from "../../utils/function";
 
 export default function Analyze({ analysis, addressName }) {
   const theme = useTheme();
@@ -33,7 +34,7 @@ export default function Analyze({ analysis, addressName }) {
               borderRight="1px solid #ccc"
             >
               <Typography variant="display2">
-                {analysis?.averageCommunityScore}
+                {formatNumber(analysis?.averageCommunityScore)}
               </Typography>
               <StarRating
                 value={analysis?.averageCommunityScore}
@@ -45,7 +46,7 @@ export default function Analyze({ analysis, addressName }) {
             <VerticalBox gap="6px">
               <Horizontal className="category-wrapper">
                 <Typography variant="h1">
-                  {analysis?.averageCleannessScore}
+                  {formatNumber(analysis?.averageCleannessScore)}
                 </Typography>
                 <Box
                   component="img"
@@ -61,7 +62,7 @@ export default function Analyze({ analysis, addressName }) {
               {/* 유동인구, 활기 */}
               <Horizontal className="category-wrapper">
                 <Typography variant="h1">
-                  {analysis?.averagePopulationScore}
+                  {formatNumber(analysis?.averagePopulationScore)}
                 </Typography>
                 <Box
                   component="img"
@@ -77,7 +78,7 @@ export default function Analyze({ analysis, addressName }) {
               {/* 접근성 */}
               <Horizontal className="category-wrapper">
                 <Typography variant="h1">
-                  {analysis?.averageReachabilityScore}
+                  {formatNumber(analysis?.averageReachabilityScore)}
                 </Typography>
                 <Box
                   component="img"
@@ -93,7 +94,7 @@ export default function Analyze({ analysis, addressName }) {
               {/* 임대료 */}
               <Horizontal className="category-wrapper">
                 <Typography variant="h1">
-                  {analysis?.averageRentFeeScore}
+                  {formatNumber(analysis?.averageRentFeeScore)}
                 </Typography>
                 <Box
                   component="img"
